@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bd-client">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>BD2 - Client</title>
+
+    <!-- Bootstrap -->
+    <link href="../components/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../components/bootstrap/css/my-style.css">
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if viewsview the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#/">BD2 - Client</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#/home">Home</a></li>
+            <li><a href="#/personaggi">Personaggi</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div ng-view></div>
+
+<footer class="row-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <p style="padding:10px;"></p>
+                <p align=center>© Giuseppe Lorusso</p>
+                <p align=center>Università degli Studi di Bari "Aldo Moro" - Dipartimento di Informatica </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../components/bootstrap/js/bootstrap.min.js"></script>
+<script src="../components/angular/angular.min.js"></script>
+<script src="../node_modules/angular-route/angular-route.min.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers.js"></script>
+<script src="scripts/services.js"></script>
+
+</body>
+</html>
