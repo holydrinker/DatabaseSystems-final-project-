@@ -1,7 +1,9 @@
 'use strict';
 
-app.config(['$routeProvider', '$httpProvider',
-    function ($routeProvider, $httpProvider) {
+app.config(['$routeProvider', '$httpProvider', '$locationProvider',
+    function ($routeProvider, $httpProvider, $locationProvider) {
+
+        $locationProvider.hashPrefix('');
 
         $httpProvider.defaults.headers.common = {};
         $httpProvider.defaults.headers.post = {};
