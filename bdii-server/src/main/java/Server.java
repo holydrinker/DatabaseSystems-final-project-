@@ -9,6 +9,7 @@ import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.options;
+import static spark.Spark.post;
 
 // mvn exec:java -Dexec.mainClass="Server"
 
@@ -40,12 +41,22 @@ public class Server {
             return dao.getPersonaggio(nome).toJson();
         });
 
+        post("/insertPersonaggio", (req, res) -> {
+            String nome = req.queryParams(Params.NOME);
+            String tipo = req.queryParams(Params.TIPO);
+            System.out.println("nuovo = [" + nome + " " + tipo + "]");
+            dao.insertPersonaggio(nome, tipo);
+
+            setResponseHeader(req, res);
+            return "ok";
+        });
+
+
         //Some settings
         options("/*", (request, response) -> {
             setOptionRequestResponseHeader(request, response);
             return null;
         });
-
     }
 
     private static void setResponseHeader(Request req,Response res){
@@ -62,6 +73,4 @@ public class Server {
         res.header("access-control-max-age", 10 + "");
         res.header("content-length", 0 + "");
     }
-
-
 }

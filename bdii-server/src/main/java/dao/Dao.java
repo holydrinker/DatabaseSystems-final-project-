@@ -80,4 +80,13 @@ public class Dao {
 
         return result;
     }
+
+    public void insertPersonaggio(String nome, String tipo){
+        try {
+            Statement st = connection.createStatement();
+            st.execute(Query.insertPersonaggio(nome, tipo));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

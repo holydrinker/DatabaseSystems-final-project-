@@ -1,17 +1,37 @@
 'use strict';
 
-app.controller('PersonaggiCtrl', ['$scope', 'menuFactory', function($scope, menuFactory) {
+app.controller('PersonaggiCtrl', ['$scope', 'personaggiFactory', function ($scope, personaggiFactory) {
 
     $scope.personaggi = [];
     $scope.message = "Loading...";
 
-    menuFactory.getPersonaggi()
+    personaggiFactory.getPersonaggi()
         .then(
-            function(response){
+            function (response) {
                 $scope.personaggi = response.data;
             },
-            function(response) {
-                $scope.message = "Error: "+response.status + " " + response.statusText;
+            function (response) {
+                $scope.message = "Error: " + response.status + " " + response.statusText;
             }
         );
+
+    $scope.showAddForm = function () {
+        $scope.showForm = true;
+    };
+
+    $scope.nuovoPersonaggio = {nome: "", tipo: ""};
+
+    $scope.inserisciPersonaggio = function () {
+        personaggiFactory.putPersonaggio($scope.nuovoPersonaggio)
+            .then(
+                function (response) {
+                    $scope.showForm = false;
+                },
+                function (response) {
+                    alert("Personaggio non inserito");
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+    };
+
 }]);

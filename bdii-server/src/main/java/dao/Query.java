@@ -12,4 +12,8 @@ public class Query {
     public static String getPersonaggio(String nome){
         return "SELECT * FROM Personaggio WHERE nome = '" + nome + "'";
     }
+
+    public static String insertPersonaggio(String nome, String tipo){
+        return "INSERT INTO Personaggio VALUES ('" + nome + "', '" + tipo + "')";
+    }
 }
