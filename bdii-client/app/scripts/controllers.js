@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('MainController', ['$scope', 'menuFactory', function($scope, menuFactory) {
+app.controller('PersonaggiCtrl', ['$scope', 'menuFactory', function($scope, menuFactory) {
 
     $scope.personaggi = [];
     $scope.message = "Loading...";
