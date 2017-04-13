@@ -1,4 +1,3 @@
-import dao.*;
 import entities.Personaggio;
 import org.json.JSONArray;
 import spark.Request;
@@ -10,6 +9,8 @@ import java.util.List;
 import static spark.Spark.get;
 import static spark.Spark.options;
 import static spark.Spark.post;
+
+import dao.Dao;
 
 // mvn exec:java -Dexec.mainClass="Server"
 
