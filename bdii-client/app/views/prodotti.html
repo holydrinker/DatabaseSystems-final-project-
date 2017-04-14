@@ -1,0 +1,110 @@
+<a type="submit" class="btn btn-lg btn-success" ng-click="showAddForm()">Aggiungi Prodotto</a>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Codice</th>
+            <th>Nome</th>
+            <th>Descrizione</th>
+            <th>Tipo</th>
+            <th>Prescrivibile</th>
+            <th>Anni brevetto</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="record in prodotti">
+            <td>{{record.id}}</td>
+            <td>{{record.nome}}</td>
+            <td>{{record.descrizione}}</td>
+            <td>{{record.tipo}}</td>
+            <td>{{record.prescrivibile}}</td>
+            <td>{{record.anni_brevetto}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row row-content" ng-show="showForm">
+    <div class="col-xs-12">
+        <h4>Aggiungi un prodotto</h4>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <form class="form-horizontal" role="form" name="nuovoProdottoForm" ng-submit="inserisciProdotto()">
+            <div class="form-group"
+                 ng-class="{ 'has-error' : nuovoProdottoForm.id.$error.required && !nuovoProdottoForm.id.$pristine }">
+
+                <label for="id" class="col-sm-2 control-label">Codice</label>
+                <div class="col-sm-10">
+                    <input type="text" pattern="[0-9]*" class="form-control" id="id" name="id"
+                           placeholder="Inserisci codice prodotto (SOLO NUMERI)" ng-model="nuovoProdotto.id"
+                           required>
+                    <span class="error"
+                          ng-show="nuovoProdottoForm.id.$error.required
+                          && !nuovoProdottoForm.id.$pristine">Questo campo non può essere vuoto</span>
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-class="{ 'has-error' : nuovoProdottoForm.nome.$error.required && !nuovoProdottoForm.nome.$pristine }">
+                <label for="nome" class="col-sm-2 control-label">Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nome" name="nome"
+                           placeholder="Inserisci nome prodotto" ng-model="nuovoProdotto.nome" required>
+                    <span class="error"
+                          ng-show="nuovoProdottoForm.nome.$error.required
+                          && !nuovoProdottoForm.nome.$pristine">Questo campo non può essere vuoto</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="descrizione" class="col-sm-2 control-label">Descrizione</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="descrizione" name="descrizione"
+                           placeholder="Inserisci la descrizione" ng-model="nuovoProdotto.descrizione">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo" class="col-sm-2 control-label">Tipo farmaco:</label>
+                <div class="col-sm-10">
+                    <select name="tipo" id="tipo" class="form-control" ng-model="nuovoProdotto.tipo">
+                        <option value="farmaco brevettato">Farmaco brevettato</option>
+                        <option value="farmaco generico">Farmaco generico</option>
+                        <option value="cosmetica">Cosmetica</option>
+                        <option value="igiene">Igiene</option>
+                        <option value="infanzia">Infanzia</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Prescrivibile:</label>
+
+                <div class="col-sm-10">
+                    <label class="radio-inline"> <input type="radio" name="prescribivile" ng-model="nuovoProdotto.prescrivibile" value="true">Sì</label>
+                    <label class="radio-inline"><input type="radio" name="prescribivile" ng-model="nuovoProdotto.prescrivibile" value="false">No</label>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="showAnniBrevetto()">
+                <label for="tipo" class="col-sm-2 control-label">Anni brevetto:</label>
+                <div class="col-sm-10">
+                    <select name="anni_brevetto" id="anni_brevetto" class="form-control" ng-model="nuovoProdotto.anni_brevetto">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

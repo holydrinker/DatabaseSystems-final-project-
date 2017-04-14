@@ -1,7 +1,8 @@
 package dao;
 
-import entities.Personaggio;
-import org.json.JSONException;
+import entities.Medico;
+import entities.Paziente;
+import entities.Prodotto;
 import utilities.Params;
 
 import java.sql.*;
@@ -42,15 +43,18 @@ public class Dao {
     }
     // -----------------------------------------------------------------------------
 
-    public List<Personaggio> getPersonaggi(){
-        List<Personaggio> result = new LinkedList<>();
+    public List<Paziente> getPazienti() {
+        List<Paziente> result = new LinkedList<>();
 
         try {
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(Query.getPersonaggi());
+            ResultSet rs = st.executeQuery(Query.allPazienti);
 
             while (rs.next()) {
-                Personaggio p = new Personaggio(rs.getString("nome"), rs.getString("tipo"));
+                String nome = rs.getString("nome");
+                String cognome = rs.getString("cognome");
+                String cf = rs.getString("cf");
+                Paziente p = new Paziente(nome, cognome, cf);
                 result.add(p);
             }
 
@@ -62,31 +66,96 @@ public class Dao {
         return result;
     }
 
-    public Personaggio getPersonaggio(String nome) throws JSONException {
-        Personaggio result = null;
+    public void insertPaziente(String nome, String cognome, String cf){
+        try {
+            Statement st = connection.createStatement();
+            st.execute(Query.insertPersonaggio(nome, cognome, cf));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Medico> getMedici() {
+        List<Medico> result = new LinkedList<>();
 
         try {
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery(Query.getPersonaggio(nome));
+            ResultSet rs = st.executeQuery(Query.allMedici);
 
             while (rs.next()) {
-                result = new Personaggio(rs.getString(Params.NOME), rs.getString(Params.TIPO));
+                String nome = rs.getString("nome");
+                String cognome = rs.getString("cognome");
+                int matricola = rs.getInt("matricola");
+                Medico m = new Medico(nome, cognome, matricola);
+                result.add(m);
             }
+
             rs.close();
             st.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return result;
     }
 
-    public void insertPersonaggio(String nome, String tipo){
+    public void insertMedico(String nome, String cognome, int matricola){
         try {
             Statement st = connection.createStatement();
-            st.execute(Query.insertPersonaggio(nome, tipo));
+            st.execute(Query.insertMedico(nome, cognome, matricola));
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
+    public List<Prodotto> getProdotti() {
+        List<Prodotto> result = new LinkedList<>();
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.allProdotti);
+
+            while (rs.next()) {
+                int id = rs.getInt(Params.ID);
+                String nome = rs.getString(Params.NOME);
+                String descizione = rs.getString(Params.DESCRIZIONE);
+                String tipo = rs.getString(Params.TIPO);
+                boolean prescrivibile = rs.getBoolean(Params.PRESCRIVIBILE);
+                int anni_brevetto = rs.getInt(Params.ANNI_BEVETTO);
+
+                Prodotto p = new Prodotto(
+                        id,
+                        nome,
+                        descizione,
+                        tipo,
+                        prescrivibile,
+                        anni_brevetto
+                );
+
+                result.add(p);
+            }
+
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void insertProdotto(
+            int id,
+            String nome,
+            String descrizione,
+            String tipo,
+            boolean prevescrivibile,
+            int anni_brevetto){
+
+        try {
+            Statement st = connection.createStatement();
+            st.execute(Query.insertProdotto(id, nome, descrizione, tipo, prevescrivibile, anni_brevetto));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

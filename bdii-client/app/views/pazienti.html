@@ -1,0 +1,59 @@
+<a type="submit" class="btn btn-lg btn-success" ng-click="showAddForm()">Aggiungi Paziente</a>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Codice Fiscale</th>
+            <th>Nome</th>
+            <th>Cognome</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="record in pazienti">
+            <td>{{record.cf}}</td>
+            <td>{{record.nome}}</td>
+            <td>{{record.cognome}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row row-content" ng-show="showForm">
+    <div class="col-xs-12">
+        <h4>Aggiungi un paziente</h4>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <form class="form-horizontal" role="form" name="nuovoPazienteForm" ng-submit="inserisciPaziente()">
+            <div class="form-group">
+                <label for="nome" class="col-sm-2 control-label">Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="nome" name="nome"
+                           placeholder="Inserisci il nome" ng-model="nuovoPaziente.nome">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cognome" class="col-sm-2 control-label">Cognome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cognome" name="cognome"
+                           placeholder="Inserisci il cognome" ng-model="nuovoPaziente.cognome">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cf" class="col-sm-2 control-label">CF</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="cf" name="cf"
+                           placeholder="Inserisci il codice fiscale" ng-model="nuovoPaziente.cf">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Aggiungi</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

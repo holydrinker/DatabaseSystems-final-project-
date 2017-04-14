@@ -1,4 +1,6 @@
-import entities.Personaggio;
+import entities.Medico;
+import entities.Paziente;
+import entities.Prodotto;
 import org.json.JSONArray;
 import spark.Request;
 import spark.Response;
@@ -18,16 +20,11 @@ public class Server {
     public static void main(String[] args) {
         Dao dao = Dao.getInstance();
 
-        get("/hello", (req, res) -> {
-            System.out.println("Say hello...");
-            return "Hello World";
-        });
-
-        get("/getPersonaggi", (req, res) -> {
+        get("/getPazienti", (req, res) -> {
             JSONArray json = new JSONArray();
 
-            List<Personaggio> personaggi = dao.getPersonaggi();
-            for(Personaggio p : personaggi){
+            List<Paziente> pazienti = dao.getPazienti();
+            for(Paziente p : pazienti){
                 json.put(p.toJson());
             }
 
@@ -35,23 +32,69 @@ public class Server {
             return json;
         });
 
-        get("/getPersonaggio", (req, res) -> {
+        post("/insertPaziente", (req, res) -> {
             String nome = req.queryParams(Params.NOME);
+            String cognome = req.queryParams(Params.COGNOME);
+            String cf = req.queryParams(Params.CF);
 
-            setResponseHeader(req, res);
-            return dao.getPersonaggio(nome).toJson();
-        });
-
-        post("/insertPersonaggio", (req, res) -> {
-            String nome = req.queryParams(Params.NOME);
-            String tipo = req.queryParams(Params.TIPO);
-            System.out.println("nuovo = [" + nome + " " + tipo + "]");
-            dao.insertPersonaggio(nome, tipo);
+            dao.insertPaziente(nome, cognome, cf);
 
             setResponseHeader(req, res);
             return "ok";
         });
 
+        get("/getMedici", (req, res) -> {
+            JSONArray json = new JSONArray();
+
+            List<Medico> medici = dao.getMedici();
+            for(Medico m : medici){
+                json.put(m.toJson());
+            }
+
+            setResponseHeader(req, res);
+            return json;
+        });
+
+        post("/insertMedico", (req, res) -> {
+            String nome = req.queryParams(Params.NOME);
+            String cognome = req.queryParams(Params.COGNOME);
+            String matricola = req.queryParams(Params.MATRICOLA);
+
+            dao.insertMedico(nome, cognome, Integer.parseInt(matricola));
+
+            setResponseHeader(req, res);
+            return "ok";
+        });
+
+        get("/getProdotti", (req, res) -> {
+            JSONArray json = new JSONArray();
+
+            List<Prodotto> medici = dao.getProdotti();
+            for(Prodotto p : medici) {
+                json.put(p.toJson());
+            }
+
+            setResponseHeader(req, res);
+            return json;
+        });
+
+        post("/insertProdotto", (req, res) -> {
+            String id_param = req.queryParams(Params.ID);
+            String nome = req.queryParams(Params.NOME);
+            String descrizione = req.queryParams(Params.DESCRIZIONE);
+            String tipo = req.queryParams(Params.TIPO);
+            String prescrivibile_param = req.queryParams(Params.PRESCRIVIBILE);
+            String anni_brevetto_param = req.queryParams(Params.ANNI_BEVETTO);
+
+            int id = Integer.parseInt(id_param);
+            boolean prescrivibile = Boolean.parseBoolean(prescrivibile_param);
+            int anni_brevetto = Integer.parseInt(anni_brevetto_param);
+
+            dao.insertProdotto(id, nome, descrizione, tipo, prescrivibile, anni_brevetto);
+
+            setResponseHeader(req, res);
+            return "ok";
+        });
 
         //Some settings
         options("/*", (request, response) -> {

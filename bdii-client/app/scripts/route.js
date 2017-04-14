@@ -14,8 +14,16 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
             .when('/', {
                 templateUrl: 'views/home.html'
             })
-            .when('/personaggi', {
-                templateUrl: 'views/personaggi.html',
-                controller: 'PersonaggiCtrl'
+            .when('/pazienti', {
+                templateUrl: 'views/pazienti.html',
+                controller: 'PazientiCtrl'
+            })
+            .when('/medici', {
+                templateUrl: 'views/medici.html',
+                controller: 'MediciCtrl'
+            })
+            .when('/prodotti', {
+                templateUrl: 'views/prodotti.html',
+                controller: 'ProdottiCtrl'
             })
     }]);
