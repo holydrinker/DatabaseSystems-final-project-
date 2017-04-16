@@ -158,4 +158,57 @@ public class Dao {
         }
     }
 
+    // DW --------------------------------------------------------------------------------------------------------------
+
+    public void dwSync(){
+        svuota_prodotto_audit();
+        svuota_vendite_audit();
+    }
+
+    private void svuota_prodotto_audit(){
+        try {
+            Statement st1 = connection.createStatement();
+            ResultSet rs = st1.executeQuery(Query.allProdottiAudit);
+
+            while(rs.next()){
+                String prodotto = rs.getString(Params.PRODOTTO);
+                String nome_prodotto = rs.getString(Params.NOME_PRODOTTO);
+                String tipo_prodotto = rs.getString(Params.TIPO_PRODOTTO);
+
+                connection.createStatement()
+                        .execute(Query.insertProdotto_dt(prodotto, nome_prodotto, tipo_prodotto));
+            }
+            connection.createStatement().execute(Query.truncateProdotto_audit);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void svuota_vendite_audit(){
+        try {
+            Statement st1 = connection.createStatement();
+            ResultSet rs = st1.executeQuery(Query.allVenditeAudit);
+            String prodotto_id = "";
+
+            while(rs.next()) {
+                Integer id = rs.getInt(Params.ID);
+                Integer tempo = rs.getInt(Params.TEMPO);
+                Integer quantita = rs.getInt(Params.QUANTITA);
+                Integer prodotto = rs.getInt(Params.PRODOTTO);
+
+                ResultSet prodotto_rs =
+                        connection.createStatement().executeQuery(Query.recupera_record_prodotto(prodotto.toString()));
+
+                while(prodotto_rs.next()){
+                    prodotto_id = prodotto_rs.getString(Params.ID);
+                }
+
+                connection.createStatement()
+                        .execute(Query.insertVendita_ft(id, tempo.toString(), quantita.toString(), prodotto_id));
+            }
+            connection.createStatement().execute(Query.truncateVendita_audit);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,0 +1,28 @@
+<Schema name="Farmacia">
+  <Cube name="Vendite" cache="true" enabled="true">
+    <Table name="vendita_ft" schema="public">
+    </Table>
+    <Dimension type="StandardDimension" foreignKey="prodotto" highCardinality="false" name="Prodotto">
+      <Hierarchy name="Prodotto" hasAll="true" primaryKey="id">
+        <Table name="prodotto_dt" schema="public">
+        </Table>
+        <Level name="Tipo" column="tipo_prodotto" nameColumn="tipo_prodotto" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Prodotto" column="prodotto" nameColumn="prodotto" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Dimension type="StandardDimension" foreignKey="tempo" highCardinality="false" name="Tempo">
+      <Hierarchy name="Tempo" hasAll="true" primaryKey="id">
+        <Table name="tempo_dt" schema="public">
+        </Table>
+        <Level name="Anno" column="anno" nameColumn="anno" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+        <Level name="Semestre" column="semestre" nameColumn="semestre" type="String" uniqueMembers="false" levelType="Regular" hideMemberIf="Never">
+        </Level>
+      </Hierarchy>
+    </Dimension>
+    <Measure name="quantita" column="quantita" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

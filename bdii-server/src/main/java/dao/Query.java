@@ -34,5 +34,34 @@ public class Query {
                 + anni_brevetto + "')";
     }
 
+    public static String allProdottiAudit = "SELECT * FROM prodotto_audit";
 
+    public static String insertProdotto_dt(
+            String prodotto,
+            String nome_prodotto,
+            String tipo_prodotto){
+
+        return "INSERT INTO prodotto_dt(prodotto, nome_prodotto, tipo_prodotto) VALUES ('" +
+                prodotto + "', '" +
+                nome_prodotto + "', '" +
+                tipo_prodotto + "')";
+    }
+
+    public static String truncateProdotto_audit = "TRUNCATE prodotto_audit";
+
+    public static String allVenditeAudit = "SELECT * FROM vendita_audit";
+
+    public static String insertVendita_ft(int id, String tempo, String quantita, String prodotto){
+        return "INSERT INTO vendita_ft VALUES (" +
+                id          + ", " +
+                tempo       + ", " +
+                quantita    + ", " +
+                prodotto    + ")";
+    }
+
+    public static String truncateVendita_audit = "TRUNCATE vendita_audit";
+
+    public static String recupera_record_prodotto(String prodotto){
+            return "SELECT id FROM prodotto_dt WHERE prodotto = '" + prodotto + "'";
+    }
 }

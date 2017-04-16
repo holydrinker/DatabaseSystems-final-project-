@@ -96,6 +96,11 @@ public class Server {
             return "ok";
         });
 
+        get("/dwSync", (req, res) -> {
+            dao.dwSync();
+            return "dw ok";
+        });
+
         //Some settings
         options("/*", (request, response) -> {
             setOptionRequestResponseHeader(request, response);
