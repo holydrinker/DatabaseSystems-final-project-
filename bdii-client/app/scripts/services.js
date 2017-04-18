@@ -23,6 +23,7 @@ app
 
         return result;
     }])
+
     .factory('mediciFactory', ['$http', 'baseURL', function ($http, baseURL) {
 
         var result = {};
@@ -42,8 +43,13 @@ app
             });
         };
 
+        result.getMediciFarmaci = function () {
+            return $http.get(baseURL + "getMedicoFarmaco");
+        };
+
         return result;
     }])
+
     .factory('prodottiFactory', ['$http', 'baseURL', function ($http, baseURL) {
 
         var result = {};
@@ -59,12 +65,41 @@ app
                 "&descrizione=" + nuovoProdotto.descrizione +
                 "&tipo=" + nuovoProdotto.tipo +
                 "&prescrivibile=" + nuovoProdotto.prescrivibile +
-                "&anni_brevetto=" + nuovoProdotto.anni_brevetto;
+                "&anni_brevetto=" + nuovoProdotto.anni_brevetto +
+                "&casa_farmaceutica=" + nuovoProdotto.casa_farmaceutica ;
 
             return $http.post(baseURL + "insertProdotto", data, {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             });
         };
 
+        result.getCase = function () {
+            return $http.get(baseURL + "getCaseFarmaceutiche");
+        };
+
         return result;
-    }]);
+    }])
+
+    .factory('equivalenzaFactory', ['$http', 'baseURL', function ($http, baseURL) {
+
+        var result = {};
+
+        result.getFarmaciEquivalenti = function(){
+            return $http.get(baseURL + "getEquivalenze");
+        };
+
+        return result;
+    }])
+
+    .factory('prescrizioniFactory', ['$http', 'baseURL', function ($http, baseURL) {
+
+        var result = {};
+
+        result.getPrescrizioni = function(){
+            return $http.get(baseURL + "getPrescrizioni");
+        };
+
+        return result;
+    }])
+;
+

@@ -1,0 +1,17 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Codice Medico</th>
+            <th>Codice Farmaco</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="mf in medici_farmaci">
+            <td>{{mf.medico}}</td>
+            <td>{{mf.farmaco}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

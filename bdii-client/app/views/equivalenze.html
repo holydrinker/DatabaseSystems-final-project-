@@ -1,0 +1,17 @@
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Farmaco Brevettato</th>
+            <th>Farmaco Generico Equivalente</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="record in equivalenze">
+            <td>{{record.brevettato}}</td>
+            <td>{{record.equivalente}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

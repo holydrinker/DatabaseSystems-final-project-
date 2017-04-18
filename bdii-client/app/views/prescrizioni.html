@@ -1,0 +1,22 @@
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Codice</th>
+            <th>Codice Medico</th>
+            <th>CF Paziente</th>
+            <th>Farmaci Prescritti</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="record in prescrizioni">
+            <td>{{record.id}}</td>
+            <td>{{record.codiceMedico}}</td>
+            <td>{{record.cfPaziente}}</td>
+            <td>{{record.farmaci_prescritti}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

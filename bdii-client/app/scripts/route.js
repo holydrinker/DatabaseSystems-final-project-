@@ -26,4 +26,16 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
                 templateUrl: 'views/prodotti.html',
                 controller: 'ProdottiCtrl'
             })
+            .when('/equivalenze', {
+                templateUrl: 'views/equivalenze.html',
+                controller: 'EquivalenzaCtrl'
+            })
+            .when('/prescrizioni', {
+                templateUrl: 'views/prescrizioni.html',
+                controller: 'PrescrizioniCtrl'
+            })
+            .when('/medici_farmaci', {
+                templateUrl: 'views/medici_farmaci.html',
+                controller: 'MediciCtrl'
+            })
     }]);

@@ -9,6 +9,7 @@
             <th>Tipo</th>
             <th>Prescrivibile</th>
             <th>Anni brevetto</th>
+            <th>Casa Farmaceutica</th>
         </tr>
         </thead>
 
@@ -20,6 +21,7 @@
             <td>{{record.tipo}}</td>
             <td>{{record.prescrivibile}}</td>
             <td>{{record.anni_brevetto}}</td>
+            <td>{{record.casa_farmaceutica}}</td>
         </tr>
         </tbody>
     </table>
@@ -96,6 +98,15 @@
                         <option value="3">3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" ng-show="showCasa()">
+                <label for="casa" class="col-sm-2 control-label">Casa Farmaceutica:</label>
+                <div class="col-sm-10">
+                    <select name="casa" id="casa" class="form-control" ng-model="nuovoProdotto.casa_farmaceutica">
+                        <option ng-repeat="c in case" value={{c.casa}}>{{c.casa}}</option>
                     </select>
                 </div>
             </div>

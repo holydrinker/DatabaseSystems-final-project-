@@ -1,10 +1,9 @@
 package dao;
 
-import entities.Medico;
-import entities.Paziente;
-import entities.Prodotto;
+import entities.*;
 import utilities.Params;
 
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
@@ -142,6 +141,37 @@ public class Dao {
         return result;
     }
 
+    public String getCasaFarmaceutica(int idProdotto){
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.getCasaFarmaceutica(idProdotto));
+            while(rs.next()){
+                String nome = rs.getString(Params.NOME_CASA_FARMACEUTICA);
+                String recapito = rs.getString(Params.RECAPITO_CASA_FARMACEUTICA);
+                return nome + " (" + recapito + ")";
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public List<CasaFarmaceutica> getAndComposeAllCaseFarmaceutiche(){
+        List<CasaFarmaceutica> result = new LinkedList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.getAllCaseFarmaceutiche);
+            while(rs.next()){
+                String nome = rs.getString(Params.NOME);
+                String recapito = rs.getString(Params.RECAPITO);
+                result.add(new CasaFarmaceutica(nome + " (" + recapito + ")"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public void insertProdotto(
             int id,
             String nome,
@@ -156,6 +186,81 @@ public class Dao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Equivalenza> getEquivalenze(){
+        List<Equivalenza> result = new LinkedList<>();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.allEquivalenze);
+            while(rs.next()){
+                Integer brevettato = Integer.parseInt(rs.getString(Params.FARMACO_BREVETTATO));
+                Integer equivalente = Integer.parseInt(rs.getString(Params.FARMACO_GENERICO));
+                Equivalenza e = new Equivalenza(brevettato, equivalente);
+                result.add(e);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Prescrizione> getPrescrizioni() {
+        List<Prescrizione> result = new LinkedList<>();
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.allPrescrizioni);
+            while(rs.next()){
+                Integer id = rs.getInt(Params.ID);
+                Integer codiceMedico = rs.getInt(Params.MEDICO);
+                String cfPaziente = rs.getString(Params.PAZIENTE);
+                Prescrizione p = new Prescrizione(id, codiceMedico, cfPaziente);
+                result.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Integer> getFarmaciPrescrizione(int idPrescrizione) {
+        List<Integer> result = new LinkedList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.getFarmaci_Prescrizione(idPrescrizione));
+            while(rs.next()){
+                result.add(rs.getInt(Params.FARMACO));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void insertProduzione(int farmaco, String nome_casa_farmaceutica, String recapito_casa_farmaceutica) {
+        try {
+            Statement st = connection.createStatement();
+            st.execute(Query.insertProduzione(farmaco, nome_casa_farmaceutica, recapito_casa_farmaceutica));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<MedicoFarmaco> getMedicoFarmaco(){
+        List<MedicoFarmaco> result = new LinkedList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.getMediciFarmaci);
+            while(rs.next()){
+                Integer medico = rs.getInt(Params.MEDICO);
+                Integer farmaco = rs.getInt(Params.FARMACO);
+                MedicoFarmaco mf = new MedicoFarmaco(medico, farmaco);
+                result.add(mf);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     // DW --------------------------------------------------------------------------------------------------------------

@@ -17,6 +17,10 @@ public class Query {
 
     public static String allProdotti = "SELECT * FROM prodotto";
 
+    public static String getCasaFarmaceutica(int idProdotto){
+        return "SELECT * FROM produzione WHERE farmaco = " + idProdotto;
+    }
+
     public static String insertProdotto(
             int id,
             String nome,
@@ -25,13 +29,13 @@ public class Query {
             boolean prevescrivibile,
             int anni_brevetto
     ){
-        return "INSERT INTO prodotto VALUES ('"
-                + id + "', '"
+        return "INSERT INTO prodotto VALUES ("
+                + id + ", '"
                 + nome + "', '"
                 + descrizione + "', '"
                 + tipo + "', '"
-                + prevescrivibile + "', '"
-                + anni_brevetto + "')";
+                + prevescrivibile + "', "
+                + anni_brevetto + ")";
     }
 
     public static String allProdottiAudit = "SELECT * FROM prodotto_audit";
@@ -64,4 +68,20 @@ public class Query {
     public static String recupera_record_prodotto(String prodotto){
             return "SELECT id FROM prodotto_dt WHERE prodotto = '" + prodotto + "'";
     }
+
+    public static String allEquivalenze = "SELECT * FROM equivalenza";
+
+    public static String allPrescrizioni = "SELECT * FROM prescrizione";
+
+    public static String getFarmaci_Prescrizione (int idPrescrizione) {
+        return "SELECT * FROM prescrizione_farmaci WHERE prescrizione = " + idPrescrizione;
+    }
+
+    public static String getAllCaseFarmaceutiche = "SELECT * FROM casa_farmaceutica";
+
+    public static String insertProduzione(int farmaco, String nome_casa, String recapito_casa){
+        return "INSERT INTO produzione VALUES (" + farmaco + ", '" + nome_casa + "', '" + recapito_casa + "')";
+    }
+
+    public static String getMediciFarmaci = "SELECT * FROM medico_farmaco";
 }

@@ -43,12 +43,23 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
     .controller('MediciCtrl', ['$scope', '$route', 'mediciFactory', function ($scope, $route, mediciFactory) {
 
         $scope.medici = [];
+        $scope.medici_farmaci = [];
         $scope.message = "Loading...";
 
         mediciFactory.getMedici()
             .then(
                 function (response) {
                     $scope.medici = response.data;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+
+        mediciFactory.getMediciFarmaci()
+            .then(
+                function (response) {
+                    $scope.medici_farmaci = response.data;
                 },
                 function (response) {
                     $scope.message = "Error: " + response.status + " " + response.statusText;
@@ -83,11 +94,22 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
 
         $scope.prodotti = [];
         $scope.message = "Loading...";
+        $scope.case = [];
 
         prodottiFactory.getProdotti()
             .then(
                 function (response) {
                     $scope.prodotti = response.data;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+
+        prodottiFactory.getCase()
+            .then(
+                function (response) {
+                    $scope.case = response.data;
                 },
                 function (response) {
                     $scope.message = "Error: " + response.status + " " + response.statusText;
@@ -106,13 +128,25 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
             }
         };
 
+        $scope.showCasa = function () {
+            if(
+                $scope.nuovoProdotto.tipo.localeCompare("farmaco brevettato") == 0 ||
+                $scope.nuovoProdotto.tipo.localeCompare("farmaco generico") == 0
+            ){
+                return true;
+            } else {
+                return false;
+            }
+        };
+
         $scope.nuovoProdotto = {
             id: "",
             nome: "",
             descrizione: "",
             tipo: "farmaco generico",
             prescrivibile: "true",
-            anni_brevetto: "1"
+            anni_brevetto: "-1",
+            casa_farmaceutica: ""
         };
 
         $scope.inserisciProdotto = function () {
@@ -127,6 +161,7 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
                         $scope.nuovoProdotto.tipo = "";
                         $scope.nuovoProdotto.prescrivibile = "";
                         $scope.nuovoProdotto.anni_brevetto = "";
+                        $scope.nuovoProdotto.casa_farmaceutica = "";
                         $route.reload();
                     },
                     function (response) {
@@ -136,4 +171,40 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
                 );
         };
 
-    }]);
+    }])
+    .controller('EquivalenzaCtrl', ['$scope', '$route', 'equivalenzaFactory', function ($scope, $route, equivalenzaFactory) {
+
+        $scope.equivalenze = [];
+        $scope.message = "Loading...";
+
+        equivalenzaFactory.getFarmaciEquivalenti()
+            .then(
+                function (response) {
+                    $scope.equivalenze = response.data;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+    }])
+
+    .controller('PrescrizioniCtrl', ['$scope', '$route', 'prescrizioniFactory', function ($scope, $route, prescrizioniFactory) {
+
+        $scope.prescrizioni = [];
+        $scope.message = "Loading...";
+
+        prescrizioniFactory.getPrescrizioni()
+            .then(
+                function (response) {
+                    $scope.prescrizioni = response.data;
+                },
+                function (response) {
+                    $scope.message = "Error: " + response.status + " " + response.statusText;
+                }
+            );
+
+        $scope.inserisciPrescrizione = function () {
+            alert("ok");
+        }
+    }])
+;

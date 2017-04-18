@@ -13,7 +13,17 @@ public class Params {
     public static final String PRODOTTO = "prodotto";
     public static final String NOME_PRODOTTO = "nome_prodotto";
     public static final String TIPO_PRODOTTO = "tipo_prodotto";
-    public static final String CASA_FARMACEUTICA = "casa_farmaceutica";
     public static final String TEMPO = "tempo";
     public static final String QUANTITA = "quantita";
+    public static final String FARMACO_BREVETTATO = "farmaco_brevettato";
+    public static final String FARMACO_GENERICO = "farmaco_equivalente";
+    public static final String MEDICO = "medico";
+    public static final String PAZIENTE = "paziente";
+    public static final String FARMACO = "farmaco";
+    public static final String FARMACI_PRESCRITTI = "farmaci_prescritti";
+    public static final String NOME_CASA_FARMACEUTICA = "nome_casa_farmaceutica";
+    public static final String RECAPITO_CASA_FARMACEUTICA = "recapito_casa_farmaceutica";
+    public static final String RECAPITO = "recapito";
+    public static final String CASA = "casa";
+    public static final String CASA_FARMACEUTICA = "casa_farmaceutica";
 }
