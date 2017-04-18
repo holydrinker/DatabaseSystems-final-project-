@@ -3,10 +3,13 @@ package dao;
 import entities.*;
 import utilities.Params;
 
+import javax.sql.StatementEvent;
 import javax.swing.plaf.nimbus.State;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 
 public class Dao {
@@ -334,6 +337,7 @@ public class Dao {
 
     public String insertVendita(String prescrizione, String data, int[] prodotti, int[] quantita){
         boolean ok = false;
+        Set<Integer> prodottiAuditBackup = new HashSet<>();
 
         // Registrare la vendita
         try {
@@ -346,10 +350,17 @@ public class Dao {
 
         if(ok){
             try {
+                // Mi servono tutti i prodotti già presenti nella tabella audit prima di fare un nuovo insert.
+                // Verranno usati in caso di rollback-----------------------|
+                Statement st = connection.createStatement();
+                ResultSet rs = st.executeQuery(Query.allProdottiAudit);
+                while(rs.next()){
+                    prodottiAuditBackup.add(rs.getInt(Params.ID));
+                }//---------------------------------------------------------|
+
                 // Registra i prodotti acquistati nell'ultima vendita
                 for (int i = 0; i < prodotti.length; i++) {
-                    Statement st = connection.createStatement();
-                    ResultSet rs = st.executeQuery(Query.getLastVenditaId);
+                    rs = connection.createStatement().executeQuery(Query.getLastVenditaId);
                     int vendita = -1;
                     while (rs.next()) {
                         vendita = rs.getInt(Params.ID);
@@ -357,8 +368,7 @@ public class Dao {
                     int prodotto = prodotti[i];
                     int quant = quantita[i];
 
-                    st = connection.createStatement();
-                    st.execute(Query.insertProdottoVendita(vendita, prodotto, quant));
+                    connection.createStatement().execute(Query.insertProdottoVendita(vendita, prodotto, quant));
                 }
             } catch(SQLException e){
                 /* Se ci sono stati problemi nell'inserimento dei prodotti, bisogna gestire manualmente
@@ -370,12 +380,30 @@ public class Dao {
                     while(rs.next()){
                         id = rs.getInt(Params.ID);
                     }
-                    st = connection.createStatement();
-                    int rowDeleted = st.executeUpdate(Query.deleteVenditaProdotto(id));
-                    System.out.println("rowDeleted: " + rowDeleted);
-                    st = connection.createStatement();
-                    st.execute(Query.deleteVendita(id));
+                    int rowDeleted = connection.createStatement().executeUpdate(Query.deleteVenditaProdotto(id));
+                    connection.createStatement().execute(Query.deleteVendita(id));
+
+                    // Infine, bisogna fare il rollback anche sulle tuple inserite dai trigger nelle tabella audit
+                    // Cancello le ultime k vendite inserite basandomi sul numero di rowDeleted
+                    rs = connection.createStatement().executeQuery(Query.getVenditaAuditIdToDelete(rowDeleted));
+                    while(rs.next()){
+                        int id_audit = rs.getInt(Params.ID);
+                        st = connection.createStatement();
+                        //System.out.println(Query.deleteFromVenditaAudit(id_audit));
+                        st.execute(Query.deleteFromVenditaAudit(id_audit));
+                    }
+
+                    // Cancello i prodotti inseriti nella audit. Qui devo fare un confronto fra ciò ceh c'era prima e dopo
+                    // Uso prodottiAuditBackup calcolati all'inizio. Rifaccio lo stesso calcolo e lo confronto
+                    rs = connection.createStatement().executeQuery(Query.allProdottiAudit);
+                    while(rs.next()){
+                        int id_audit = rs.getInt(Params.PRODOTTO);
+                        if(!prodottiAuditBackup.contains(id_audit)){ //è stato appena inserito e va coinvolto nel rollback
+                            connection.createStatement().execute(Query.deleteFromProdottiAudit(id_audit));
+                        }
+                    }
                     return "no";
+
                 } catch (SQLException e1) {
                     System.out.println("Impossibile effettuare il rollback delle vendite");
                     e1.printStackTrace();
@@ -385,6 +413,36 @@ public class Dao {
         return "ok";
     }
 
+    public List<Vendita> getVenditeBrevettate(){
+        List <Vendita> result = new LinkedList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.allVenditeBrevettate);
+            while(rs.next()){
+                int id = rs.getInt(Params.ID);
+                String data = rs.getString(Params.DATA);
+                String prescrizione = rs.getString(Params.PRESCRIZIONE);
+
+                // Recupera i prodotti associati alla vendita
+                String prodotti = "";
+                st = connection.createStatement();
+                ResultSet rsp = st.executeQuery(Query.getProdottiVendita(id));
+                while(rsp.next()){
+                    String prodotto = rsp.getString(Params.PRODOTTO);
+                    String quantita = rsp.getString(Params.QUANTITA);
+                    String format = Params.PRODOTTO + ": " + prodotto + " x " + quantita;
+                    prodotti += format + " - ";
+                }
+                prodotti = prodotti.substring(0, prodotti.length() - 2);
+
+                Vendita v = new Vendita(id, data, prescrizione, prodotti);
+                result.add(v);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
     // DW --------------------------------------------------------------------------------------------------------------
 
     public void dwSync(){

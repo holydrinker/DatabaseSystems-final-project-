@@ -135,6 +135,10 @@ app
             });
         };
 
+        result.getVenditeBrevettati = function () {
+            return $http.get(baseURL + "getVenditeBrevettati");
+        };
+
         return result;
     }])
 ;

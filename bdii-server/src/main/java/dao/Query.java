@@ -107,7 +107,8 @@ public class Query {
         if(prescrizione.equals("")){
             return "INSERT INTO vendita(data) VALUES (to_date('" + data + "', 'DD/MM/YYYY'))";
         } else {
-            return "INSERT INTO vendita VALUES (" + Integer.parseInt(prescrizione) + ", (to_date('" + data + "', 'DD/MM/YYYY'))";
+            //System.out.println("INSERT INTO vendita VALUES (" + Integer.parseInt(prescrizione) + ", to_date('" + data + "', 'DD/MM/YYYY'))");
+            return "INSERT INTO vendita(prescrizione, data) VALUES (" + Integer.parseInt(prescrizione) + ", to_date('" + data + "', 'DD/MM/YYYY'))";
         }
     }
 
@@ -124,5 +125,27 @@ public class Query {
     public static String deleteVendita(int idVendita) {
         return "DELETE FROM vendita WHERE id = " + idVendita;
     }
+
+    public static String getVenditaAuditIdToDelete(int rowDeleted){
+        return "SELECT * FROM vendita_audit ORDER BY id LIMIT " + rowDeleted;
+    }
+
+    public static String deleteFromVenditaAudit(int id){
+        return "DELETE FROM vendita_audit WHERE id = " + id;
+    }
+
+    public static String deleteFromProdottiAudit(int id){
+        return "DELETE FROM prodotto_audit WHERE prodotto = '" + id + "'";
+    }
+
+    public static String allVenditeBrevettate = "" +
+            "SELECT vendita.id, vendita.data, vendita.prescrizione " +
+            "FROM prodotto, vendita_prodotto, vendita " +
+            "WHERE prodotto.id = vendita_prodotto.prodotto " +
+            "AND vendita_prodotto.vendita = vendita.id " +
+            "AND tipo = 'farmaco brevettato'";
+
+
+
 
 }

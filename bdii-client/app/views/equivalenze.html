@@ -1,3 +1,4 @@
+<input type="text" class="form-control" placeholder="Inserisci codice farmaco da cercare" ng-model="ricerca">
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -8,7 +9,7 @@
         </thead>
 
         <tbody>
-        <tr ng-repeat="record in equivalenze">
+        <tr ng-repeat="record in equivalenze | filter : filtra(record.brevettato)">
             <td>{{record.brevettato}}</td>
             <td>{{record.equivalente}}</td>
         </tr>

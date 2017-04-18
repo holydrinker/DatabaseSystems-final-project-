@@ -198,22 +198,6 @@ public class Server {
             return "ok";
         });
 
-        /*get("/getVendite", (req, res) -> {
-            JSONArray json = new JSONArray();
-
-            List<Prodotto> medici = dao.getProdotti();
-            for(Prodotto p : medici) {
-                JSONObject jobj = p.toJson();
-                int id = jobj.getInt(Params.ID);
-                String casa_farmaceutica = dao.getCasaFarmaceutica(id);
-                jobj.put(Params.CASA_FARMACEUTICA, casa_farmaceutica);
-                json.put(jobj);
-            }
-
-            setResponseHeader(req, res);
-            return json;
-        });*/
-
         get("/getVendite", (req, res) -> {
             JSONArray json = new JSONArray();
             List<Vendita> vendite = dao.getVendite();
@@ -254,6 +238,21 @@ public class Server {
 
             setResponseHeader(req, res);
             return obj;
+        });
+
+        get("/getVenditeBrevettati", (req, res) -> {
+            JSONArray json = new JSONArray();
+            List<Vendita> vendite = dao.getVenditeBrevettate();
+            for(Vendita v: vendite){
+                JSONObject venditaJson = v.toJson();
+                boolean hasPrescrizione = venditaJson.has(Params.PRESCRIZIONE);
+                if(!hasPrescrizione){
+                    venditaJson.put(Params.PRESCRIZIONE, "");
+                }
+                json.put(venditaJson);
+            }
+            setResponseHeader(req, res);
+            return json;
         });
 
         get("/dwSync", (req, res) -> {

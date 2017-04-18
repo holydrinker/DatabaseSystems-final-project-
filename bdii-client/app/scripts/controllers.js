@@ -176,6 +176,7 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
 
         $scope.equivalenze = [];
         $scope.message = "Loading...";
+        $scope.ricerca = "";
 
         equivalenzaFactory.getFarmaciEquivalenti()
             .then(
@@ -186,6 +187,12 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
                     $scope.message = "Error: " + response.status + " " + response.statusText;
                 }
             );
+
+        $scope.filtra = function(){
+            return function (record) {
+                return record.brevettato == $scope.ricerca;
+            }
+        };
     }])
 
     .controller('PrescrizioniCtrl', ['$scope', '$route', 'prescrizioniFactory', 'prodottiFactory',
@@ -255,6 +262,7 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
 
     .controller('VenditeCtrl', ['$scope', '$route', 'venditeFactory', 'prescrizioniFactory',
         function ($scope, $route, venditeFactory, prescrizioniFactory) {
+            $scope.titolo = "Vendite";
 
             $scope.vendite = [];
             $scope.prescrizioni_ids = [];
@@ -267,15 +275,30 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
                 $scope.showForm = true;
             };
 
+
             venditeFactory.getVendite()
                 .then(
                     function (response) {
                         $scope.vendite = response.data;
+                        $scope.titolo = "Vendite";
                     },
                     function (response) {
                         alert("Impossibile recuperare le vendite");
                     }
                 );
+
+            $scope.getVendite = function () {
+                venditeFactory.getVendite()
+                    .then(
+                        function (response) {
+                            $scope.vendite = response.data;
+                            $scope.titolo = "Vendite";
+                        },
+                        function (response) {
+                            alert("Impossibile recuperare le vendite");
+                        }
+                    );
+            };
 
             prescrizioniFactory.getPrescrizioni()
                 .then(
@@ -306,6 +329,19 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
                         },
                         function (response) {
                             alert("Vendita non inserita.");
+                        }
+                    );
+            };
+
+            $scope.getVenditeBrevettati = function () {
+                venditeFactory.getVenditeBrevettati()
+                    .then(
+                        function (response) {
+                            $scope.vendite = response.data;
+                            $scope.titolo = "Vendite (con farmaci brevettati)";
+                        },
+                        function (response) {
+                            alert("Impossibile recuperare le vendite brevettate");
                         }
                     );
             }
