@@ -7,8 +7,8 @@
 
 
 #### Run application
-- Import db into postgres (dbname: farmacia, user: farmacista, password: farmacista)
-- Go with terminal  into bdii-server directory and type mvn exec:java -Dexec.mainClass="Server" 
-- Go with termina into bdii-client/app and type python -mSimpleHTTPServer
-- Open your browser (app tested on Google Chrome): http://localhost:8000/
-- Enjoy
+-Import db into postgres (dbname: farmacia, user: farmacista, password: farmacista)
+-Go with terminal  into bdii-server directory and type `mvn exec:java -Dexec.mainClass="Server"`
+-Go with termina into bdii-client/app and type `python -mSimpleHTTPServer`
+-Open your browser (app tested on Google Chrome): http://localhost:8000/
+-Enjoy
