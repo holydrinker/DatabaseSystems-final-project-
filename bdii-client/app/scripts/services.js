@@ -77,6 +77,10 @@ app
             return $http.get(baseURL + "getCaseFarmaceutiche");
         };
 
+        result.getProdottiPrescrivibili = function () {
+            return $http.get(baseURL + "getProdottiPrescrivibili");
+        };
+
         return result;
     }])
 
@@ -97,6 +101,38 @@ app
 
         result.getPrescrizioni = function(){
             return $http.get(baseURL + "getPrescrizioni");
+        };
+
+        result.putPrescrizione = function (nuovaPrescrizione) {
+            var data =
+                "medico=" + nuovaPrescrizione.medico +
+                "&paziente=" + nuovaPrescrizione.paziente +
+                "&farmaci=" + nuovaPrescrizione.farmaci;
+
+            return $http.post(baseURL + "insertPrescrizione", data, {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
+        };
+
+        return result;
+    }])
+
+    .factory('venditeFactory', ['$http', 'baseURL', function ($http, baseURL) {
+
+        var result = {};
+
+        result.getVendite = function(){
+            return $http.get(baseURL + "getVendite");
+        };
+
+        result.putVendita = function (nuovaVendita) {
+            var data =
+                "prescrizione=" + nuovaVendita.prescrizione+
+                "&prodotti=" + nuovaVendita.prodotti;
+
+            return $http.post(baseURL + "insertVendita", data, {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            });
         };
 
         return result;

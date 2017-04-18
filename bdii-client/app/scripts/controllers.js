@@ -188,10 +188,21 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
             );
     }])
 
-    .controller('PrescrizioniCtrl', ['$scope', '$route', 'prescrizioniFactory', function ($scope, $route, prescrizioniFactory) {
+    .controller('PrescrizioniCtrl', ['$scope', '$route', 'prescrizioniFactory', 'prodottiFactory',
+        function ($scope, $route, prescrizioniFactory, prodottiFactory) {
 
         $scope.prescrizioni = [];
         $scope.message = "Loading...";
+        $scope.nuovaPrescrizione = {
+            medico: "",
+            cliente: "",
+            farmaci: []
+        };
+        $scope.prodotti = [];
+
+        $scope.showAddForm = function () {
+            $scope.showForm = true;
+        };
 
         prescrizioniFactory.getPrescrizioni()
             .then(
@@ -203,8 +214,100 @@ app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function 
                 }
             );
 
+        prodottiFactory.getProdottiPrescrivibili()
+            .then(
+                function (response) {
+                    $scope.prodotti = response.data;
+                },
+                function (response) {
+                    alert("Impossibile recuperare i prodotti");
+                }
+            );
+
+
+        
+        $scope.toggleSelection = function (id) {
+            var idx = $scope.nuovaPrescrizione.farmaci.indexOf(id);
+            if (idx > -1) {
+                $scope.nuovaPrescrizione.farmaci.splice(idx, 1);
+            } else{
+                $scope.nuovaPrescrizione.farmaci.push(id);
+            }
+        };
+        
         $scope.inserisciPrescrizione = function () {
-            alert("ok");
-        }
+            prescrizioniFactory.putPrescrizione($scope.nuovaPrescrizione)
+                .then(
+                    function (response) {
+                        $scope.showForm = false;
+                        $scope.nuovaPrescrizione.medico = "";
+                        $scope.nuovaPrescrizione.paziente= "";
+                        $scope.nuovaPrescrizione.farmaci= [];
+                        $route.reload();
+                    },
+                    function (response) {
+                        alert("Prescrizione non inserita.");
+                    }
+                );
+        };
+
     }])
+
+    .controller('VenditeCtrl', ['$scope', '$route', 'venditeFactory', 'prescrizioniFactory',
+        function ($scope, $route, venditeFactory, prescrizioniFactory) {
+
+            $scope.vendite = [];
+            $scope.prescrizioni_ids = [];
+            $scope.nuovaVendita = {
+                prescrizione: "",
+                prodotti: ""
+            };
+
+            $scope.showAddForm = function () {
+                $scope.showForm = true;
+            };
+
+            venditeFactory.getVendite()
+                .then(
+                    function (response) {
+                        $scope.vendite = response.data;
+                    },
+                    function (response) {
+                        alert("Impossibile recuperare le vendite");
+                    }
+                );
+
+            prescrizioniFactory.getPrescrizioni()
+                .then(
+                    function (response) {
+                        var prescrizioni = response.data;
+                        for(var i in prescrizioni){
+                            $scope.prescrizioni_ids.push(prescrizioni[i].id);
+                        }
+                    },
+                    function (response) {
+                        alert("Impossibile recuperare le vendite");
+                    }
+                );
+
+            $scope.inserisciVendita = function () {
+                venditeFactory.putVendita($scope.nuovaVendita)
+                    .then(
+                        function (response) {
+                            $scope.showForm = false;
+                            $scope.nuovaVendita.prescrizione = "";
+                            $scope.nuovaVendita.prodotti= "";
+
+                            if(response.data.stato.localeCompare("no") == 0){
+                                alert("Hai cercato di acquistare prodotti non validi.");
+                            }
+
+                            $route.reload();
+                        },
+                        function (response) {
+                            alert("Vendita non inserita.");
+                        }
+                    );
+            }
+        }])
 ;

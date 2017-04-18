@@ -26,4 +26,10 @@ public class Params {
     public static final String RECAPITO = "recapito";
     public static final String CASA = "casa";
     public static final String CASA_FARMACEUTICA = "casa_farmaceutica";
+    public static final String FARMACI = "farmaci";
+    public static final String PRODOTTI = "prodotti";
+    public static final String PRESCRIZIONE = "prescrizione";
+    public static final String DATA = "data";
+    public static final String VENDITA = "vendita";
+    public static final String STATO = "stato";
 }

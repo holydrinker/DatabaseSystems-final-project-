@@ -1,0 +1,55 @@
+<a type="submit" class="btn btn-lg btn-success" ng-click="showAddForm()">Aggiungi Vendita</a>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Prescrizione</th>
+            <th>Data</th>
+            <th>Prodotti Acquistati</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="record in vendite">
+            <td>{{record.id}}</td>
+            <td>{{record.prescrizione}}</td>
+            <td>{{record.data}}</td>
+            <td>{{record.prodotti}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="row row-content" ng-show="showForm">
+    <div class="col-xs-12">
+        <h4>Aggiungi Vendita</h4>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+        <form class="form-horizontal" role="form" name="nuovaVenditaForm" ng-submit="inserisciVendita()">
+            <div class="form-group">
+                <label for="prescrizione" class="col-sm-2 control-label">Prescrizione</label>
+                <div class="col-sm-10">
+                    <select name="tipo" id="prescrizione" class="form-control"
+                            ng-model="nuovaVendita.prescrizione">
+                        <option ng-repeat="p in prescrizioni_ids" value={{p}}>{{p}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="prodotti" class="col-sm-2 control-label">Acquisti</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="prodotti" name="prodotti"
+                           placeholder="Inserisci acquisti nel formato PRODOTTO_IDxQUANTITA. Ogni acquisto separato di uno spazio" ng-model="nuovaVendita.prodotti">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">Acquista!</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

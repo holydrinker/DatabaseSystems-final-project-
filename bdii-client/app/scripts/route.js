@@ -38,4 +38,8 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
                 templateUrl: 'views/medici_farmaci.html',
                 controller: 'MediciCtrl'
             })
+            .when('/vendite', {
+                templateUrl: 'views/vendite.html',
+                controller: 'VenditeCtrl'
+            })
     }]);

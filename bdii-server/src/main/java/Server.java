@@ -5,6 +5,10 @@ import spark.Request;
 import spark.Response;
 import utilities.Params;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import static spark.Spark.get;
@@ -75,6 +79,18 @@ public class Server {
                 String casa_farmaceutica = dao.getCasaFarmaceutica(id);
                 jobj.put(Params.CASA_FARMACEUTICA, casa_farmaceutica);
                 json.put(jobj);
+            }
+
+            setResponseHeader(req, res);
+            return json;
+        });
+
+        get("getProdottiPrescrivibili", (req, res) -> {
+            JSONArray json = new JSONArray();
+
+            List<Integer> ids = dao.getFaramciPrescrivibili();
+            for(Integer id : ids) {
+                json.put(id);
             }
 
             setResponseHeader(req, res);
@@ -164,6 +180,80 @@ public class Server {
 
             setResponseHeader(req, res);
             return json;
+        });
+
+        post("/insertPrescrizione", (req, res) -> {
+            String medico = req.queryParams(Params.MEDICO);
+            String paziente = req.queryParams(Params.PAZIENTE);
+            String farmaci = req.queryParams(Params.FARMACI);
+
+            List<Integer> farmaci_ids = new LinkedList<>();
+            for(String f: farmaci.split(",")){
+                farmaci_ids.add(Integer.parseInt(f));
+            }
+
+            dao.insertPrescrizione(medico, paziente, farmaci_ids);
+
+            setResponseHeader(req, res);
+            return "ok";
+        });
+
+        /*get("/getVendite", (req, res) -> {
+            JSONArray json = new JSONArray();
+
+            List<Prodotto> medici = dao.getProdotti();
+            for(Prodotto p : medici) {
+                JSONObject jobj = p.toJson();
+                int id = jobj.getInt(Params.ID);
+                String casa_farmaceutica = dao.getCasaFarmaceutica(id);
+                jobj.put(Params.CASA_FARMACEUTICA, casa_farmaceutica);
+                json.put(jobj);
+            }
+
+            setResponseHeader(req, res);
+            return json;
+        });*/
+
+        get("/getVendite", (req, res) -> {
+            JSONArray json = new JSONArray();
+            List<Vendita> vendite = dao.getVendite();
+            for(Vendita v: vendite){
+                JSONObject venditaJson = v.toJson();
+                boolean hasPrescrizione = venditaJson.has(Params.PRESCRIZIONE);
+                if(!hasPrescrizione){
+                    venditaJson.put(Params.PRESCRIZIONE, "");
+                }
+                json.put(venditaJson);
+            }
+            setResponseHeader(req, res);
+            return json;
+        });
+
+        post("/insertVendita", (req, res) -> {
+            String prescrizione = req.queryParams(Params.PRESCRIZIONE);
+            String prodotti = req.queryParams(Params.PRODOTTI);
+
+            // Preprocessing dati
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            String data = dateFormat.format(date);
+
+            String[] acquisti = prodotti.split(" ");
+            int[] prod = new int[acquisti.length];
+            int[] quant = new int[acquisti.length];
+            for(int i = 0; i < acquisti.length; i++){
+               String[] tmp = acquisti[i].split("x");
+               prod[i] = Integer.parseInt(tmp[0]);
+               quant[i] = Integer.parseInt(tmp[1]);
+            }
+
+            // Registra vendita
+            String stato = dao.insertVendita(prescrizione, data, prod, quant);
+            JSONObject obj = new JSONObject();
+            obj.put(Params.STATO, stato);
+
+            setResponseHeader(req, res);
+            return obj;
         });
 
         get("/dwSync", (req, res) -> {

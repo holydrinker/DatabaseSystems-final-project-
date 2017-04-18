@@ -263,6 +263,128 @@ public class Dao {
         return result;
     }
 
+    public void insertPrescrizione(String medico, String paziente, List<Integer> farmaci){
+        try{
+            // Inserire prescrizione
+            Statement st = connection.createStatement();
+            st.execute(Query.insertPrescrizione(medico, paziente));
+
+            // Recuperare ID
+            st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.getLastIdPrescrizione);
+            int id = -1;
+            while(rs.next()){
+                id = rs.getInt(Params.ID);
+            }
+
+            // Inserire coppie (id - faramco)
+            for(Integer faramco: farmaci){
+                st = connection.createStatement();
+                st.execute(Query.insertProdottoPrescritto(id, faramco));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Integer> getFaramciPrescrivibili() {
+        LinkedList<Integer> result = new LinkedList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.getFarmaciPrescrivibili);
+            while(rs.next()){
+                result.add(rs.getInt(Params.ID));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public List<Vendita> getVendite(){
+        List <Vendita> result = new LinkedList<>();
+        try{
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(Query.allVendite);
+            while(rs.next()){
+                int id = rs.getInt(Params.ID);
+                String data = rs.getString(Params.DATA);
+                String prescrizione = rs.getString(Params.PRESCRIZIONE);
+
+                // Recupera i prodotti associati alla vendita
+                String prodotti = "";
+                st = connection.createStatement();
+                ResultSet rsp = st.executeQuery(Query.getProdottiVendita(id));
+                while(rsp.next()){
+                    String prodotto = rsp.getString(Params.PRODOTTO);
+                    String quantita = rsp.getString(Params.QUANTITA);
+                    String format = Params.PRODOTTO + ": " + prodotto + " x " + quantita;
+                    prodotti += format + " - ";
+                }
+                prodotti = prodotti.substring(0, prodotti.length() - 2);
+
+                Vendita v = new Vendita(id, data, prescrizione, prodotti);
+                result.add(v);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public String insertVendita(String prescrizione, String data, int[] prodotti, int[] quantita){
+        boolean ok = false;
+
+        // Registrare la vendita
+        try {
+            Statement st = connection.createStatement();
+            st.execute(Query.insertVendita(prescrizione, data));
+            ok = true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(ok){
+            try {
+                // Registra i prodotti acquistati nell'ultima vendita
+                for (int i = 0; i < prodotti.length; i++) {
+                    Statement st = connection.createStatement();
+                    ResultSet rs = st.executeQuery(Query.getLastVenditaId);
+                    int vendita = -1;
+                    while (rs.next()) {
+                        vendita = rs.getInt(Params.ID);
+                    }
+                    int prodotto = prodotti[i];
+                    int quant = quantita[i];
+
+                    st = connection.createStatement();
+                    st.execute(Query.insertProdottoVendita(vendita, prodotto, quant));
+                }
+            } catch(SQLException e){
+                /* Se ci sono stati problemi nell'inserimento dei prodotti, bisogna gestire manualmente
+                   il rollback sia sui prodotti di questa vendita già inseriti prima dell'errore, sia poi sulla vendita */
+                try {
+                    Statement st = connection.createStatement();
+                    ResultSet rs = st.executeQuery(Query.getLastVenditaId);
+                    int id = -1;
+                    while(rs.next()){
+                        id = rs.getInt(Params.ID);
+                    }
+                    st = connection.createStatement();
+                    int rowDeleted = st.executeUpdate(Query.deleteVenditaProdotto(id));
+                    System.out.println("rowDeleted: " + rowDeleted);
+                    st = connection.createStatement();
+                    st.execute(Query.deleteVendita(id));
+                    return "no";
+                } catch (SQLException e1) {
+                    System.out.println("Impossibile effettuare il rollback delle vendite");
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return "ok";
+    }
+
     // DW --------------------------------------------------------------------------------------------------------------
 
     public void dwSync(){

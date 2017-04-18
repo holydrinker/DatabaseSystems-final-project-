@@ -84,4 +84,45 @@ public class Query {
     }
 
     public static String getMediciFarmaci = "SELECT * FROM medico_farmaco";
+
+    public static String insertPrescrizione(String medico, String paziente){
+        return "INSERT INTO prescrizione(medico, paziente) VALUES (" + medico + ", '" + paziente + "')";
+    }
+
+    public static String insertProdottoPrescritto(int prescrizione, int farmaco){
+        return "INSERT INTO prescrizione_farmaci(prescrizione, farmaco) VALUES (" + prescrizione + ", " + farmaco + ")";
+    }
+
+    public static String getLastIdPrescrizione = "SELECT MAX(id) AS id FROM prescrizione";
+
+    public static String getFarmaciPrescrivibili = "SELECT id FROM prodotto WHERE prescrivibile=true";
+
+    public static String allVendite = "SELECT * FROM vendita";
+
+    public static String getProdottiVendita(int idVendita){
+        return "SELECT * FROM vendita_prodotto WHERE vendita = " + idVendita ;
+    }
+
+    public static String insertVendita(String prescrizione, String data){
+        if(prescrizione.equals("")){
+            return "INSERT INTO vendita(data) VALUES (to_date('" + data + "', 'DD/MM/YYYY'))";
+        } else {
+            return "INSERT INTO vendita VALUES (" + Integer.parseInt(prescrizione) + ", (to_date('" + data + "', 'DD/MM/YYYY'))";
+        }
+    }
+
+    public static String insertProdottoVendita(int vendita, int prodotto, int quantita){
+        return  "INSERT INTO vendita_prodotto VALUES (" + vendita + ", " + prodotto + ", " + quantita + ")";
+    }
+
+    public static String getLastVenditaId = "SELECT MAX(id) AS id FROM vendita";
+
+    public static String deleteVenditaProdotto(int idVendita){
+        return "DELETE FROM vendita_prodotto WHERE vendita = " + idVendita;
+    }
+
+    public static String deleteVendita(int idVendita) {
+        return "DELETE FROM vendita WHERE id = " + idVendita;
+    }
+
 }
