@@ -30,3 +30,7 @@
 - Run tomcat (default port 8080)
 - Open your browser (tested on Google Chrome): http://localhost:8080/mondrian/testpage.jsp?query=farmacia
 - Enjoy
+
+
+#### Sync datawarehouse
+- While server is running, open your browser and type http://localhost:4567/dwSync
