@@ -7,7 +7,7 @@
 
 #### Import Database
 - Clone or download repository
-- Create a postgres user '(name: farmacista, password: farmacista)'
+- Create a postgres user (name: farmacista, password: farmacista)
 - Find database/db.sql
 - Open Postgres shell
 - Import db typing `\i 'path/db.sql'`
