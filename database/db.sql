@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.2
 -- Dumped by pg_dump version 9.6.2
 
--- Started on 2017-04-19 15:43:36
+-- Started on 2017-04-20 00:11:08
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,7 +18,7 @@ SET row_security = off;
 
 DROP DATABASE farmacia;
 --
--- TOC entry 2292 (class 1262 OID 32817)
+-- TOC entry 2290 (class 1262 OID 33677)
 -- Name: farmacia; Type: DATABASE; Schema: -; Owner: farmacista
 --
 
@@ -47,7 +47,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2294 (class 0 OID 0)
+-- TOC entry 2292 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -58,7 +58,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 621 (class 1247 OID 33292)
+-- TOC entry 507 (class 1247 OID 33678)
 -- Name: tipo_prodotto; Type: DOMAIN; Schema: public; Owner: farmacista
 --
 
@@ -69,7 +69,7 @@ CREATE DOMAIN tipo_prodotto AS text
 ALTER DOMAIN tipo_prodotto OWNER TO farmacista;
 
 --
--- TOC entry 226 (class 1255 OID 33493)
+-- TOC entry 223 (class 1255 OID 33680)
 -- Name: aggiorna_dw(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -137,7 +137,7 @@ $$;
 ALTER FUNCTION public.aggiorna_dw() OWNER TO farmacista;
 
 --
--- TOC entry 224 (class 1255 OID 33360)
+-- TOC entry 224 (class 1255 OID 33681)
 -- Name: checkEquivalenzaFormat(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -159,7 +159,7 @@ END;$$;
 ALTER FUNCTION public."checkEquivalenzaFormat"() OWNER TO farmacista;
 
 --
--- TOC entry 208 (class 1255 OID 33023)
+-- TOC entry 208 (class 1255 OID 33682)
 -- Name: checkPrescrivibile(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -181,7 +181,7 @@ $$;
 ALTER FUNCTION public."checkPrescrivibile"() OWNER TO farmacista;
 
 --
--- TOC entry 210 (class 1255 OID 33369)
+-- TOC entry 209 (class 1255 OID 33683)
 -- Name: check_anni_brevetto_pieno(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -200,7 +200,7 @@ END;$$;
 ALTER FUNCTION public.check_anni_brevetto_pieno() OWNER TO farmacista;
 
 --
--- TOC entry 209 (class 1255 OID 33366)
+-- TOC entry 210 (class 1255 OID 33684)
 -- Name: check_anni_brevetto_vuoto(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -219,7 +219,7 @@ END;$$;
 ALTER FUNCTION public.check_anni_brevetto_vuoto() OWNER TO farmacista;
 
 --
--- TOC entry 225 (class 1255 OID 33364)
+-- TOC entry 225 (class 1255 OID 33685)
 -- Name: check_vendita_prescritta(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -250,7 +250,7 @@ $$;
 ALTER FUNCTION public.check_vendita_prescritta() OWNER TO farmacista;
 
 --
--- TOC entry 223 (class 1255 OID 33193)
+-- TOC entry 226 (class 1255 OID 33686)
 -- Name: inserisci_medico_farmaco(); Type: FUNCTION; Schema: public; Owner: farmacista
 --
 
@@ -275,7 +275,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 185 (class 1259 OID 32823)
+-- TOC entry 185 (class 1259 OID 33687)
 -- Name: casa_farmaceutica; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -288,7 +288,7 @@ CREATE TABLE casa_farmaceutica (
 ALTER TABLE casa_farmaceutica OWNER TO farmacista;
 
 --
--- TOC entry 195 (class 1259 OID 33138)
+-- TOC entry 186 (class 1259 OID 33690)
 -- Name: equivalenza; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -301,7 +301,7 @@ CREATE TABLE equivalenza (
 ALTER TABLE equivalenza OWNER TO farmacista;
 
 --
--- TOC entry 186 (class 1259 OID 32933)
+-- TOC entry 187 (class 1259 OID 33693)
 -- Name: medico; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -315,7 +315,7 @@ CREATE TABLE medico (
 ALTER TABLE medico OWNER TO farmacista;
 
 --
--- TOC entry 196 (class 1259 OID 33178)
+-- TOC entry 188 (class 1259 OID 33696)
 -- Name: medico_farmaco; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -328,7 +328,7 @@ CREATE TABLE medico_farmaco (
 ALTER TABLE medico_farmaco OWNER TO farmacista;
 
 --
--- TOC entry 194 (class 1259 OID 33088)
+-- TOC entry 189 (class 1259 OID 33699)
 -- Name: medico_matricola_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -343,8 +343,8 @@ CREATE SEQUENCE medico_matricola_seq
 ALTER TABLE medico_matricola_seq OWNER TO farmacista;
 
 --
--- TOC entry 2295 (class 0 OID 0)
--- Dependencies: 194
+-- TOC entry 2293 (class 0 OID 0)
+-- Dependencies: 189
 -- Name: medico_matricola_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -352,7 +352,7 @@ ALTER SEQUENCE medico_matricola_seq OWNED BY medico.matricola;
 
 
 --
--- TOC entry 187 (class 1259 OID 32946)
+-- TOC entry 190 (class 1259 OID 33701)
 -- Name: paziente; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -366,7 +366,7 @@ CREATE TABLE paziente (
 ALTER TABLE paziente OWNER TO farmacista;
 
 --
--- TOC entry 188 (class 1259 OID 32958)
+-- TOC entry 191 (class 1259 OID 33704)
 -- Name: prescrizione; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -380,7 +380,7 @@ CREATE TABLE prescrizione (
 ALTER TABLE prescrizione OWNER TO farmacista;
 
 --
--- TOC entry 190 (class 1259 OID 32986)
+-- TOC entry 192 (class 1259 OID 33707)
 -- Name: prescrizione_farmaci; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -393,7 +393,7 @@ CREATE TABLE prescrizione_farmaci (
 ALTER TABLE prescrizione_farmaci OWNER TO farmacista;
 
 --
--- TOC entry 189 (class 1259 OID 32964)
+-- TOC entry 193 (class 1259 OID 33710)
 -- Name: prescrizione_id_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -408,8 +408,8 @@ CREATE SEQUENCE prescrizione_id_seq
 ALTER TABLE prescrizione_id_seq OWNER TO farmacista;
 
 --
--- TOC entry 2296 (class 0 OID 0)
--- Dependencies: 189
+-- TOC entry 2294 (class 0 OID 0)
+-- Dependencies: 193
 -- Name: prescrizione_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -417,7 +417,7 @@ ALTER SEQUENCE prescrizione_id_seq OWNED BY prescrizione.id;
 
 
 --
--- TOC entry 198 (class 1259 OID 33304)
+-- TOC entry 194 (class 1259 OID 33712)
 -- Name: prodotto; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -434,7 +434,7 @@ CREATE TABLE prodotto (
 ALTER TABLE prodotto OWNER TO farmacista;
 
 --
--- TOC entry 203 (class 1259 OID 33484)
+-- TOC entry 195 (class 1259 OID 33719)
 -- Name: prodotto_audit; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -448,7 +448,7 @@ CREATE TABLE prodotto_audit (
 ALTER TABLE prodotto_audit OWNER TO farmacista;
 
 --
--- TOC entry 206 (class 1259 OID 33574)
+-- TOC entry 196 (class 1259 OID 33725)
 -- Name: prodotto_dt; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -463,7 +463,7 @@ CREATE TABLE prodotto_dt (
 ALTER TABLE prodotto_dt OWNER TO farmacista;
 
 --
--- TOC entry 205 (class 1259 OID 33572)
+-- TOC entry 197 (class 1259 OID 33731)
 -- Name: prodotto_dtt_id_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -478,8 +478,8 @@ CREATE SEQUENCE prodotto_dtt_id_seq
 ALTER TABLE prodotto_dtt_id_seq OWNER TO farmacista;
 
 --
--- TOC entry 2297 (class 0 OID 0)
--- Dependencies: 205
+-- TOC entry 2295 (class 0 OID 0)
+-- Dependencies: 197
 -- Name: prodotto_dtt_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -487,7 +487,7 @@ ALTER SEQUENCE prodotto_dtt_id_seq OWNED BY prodotto_dt.id;
 
 
 --
--- TOC entry 193 (class 1259 OID 33046)
+-- TOC entry 198 (class 1259 OID 33733)
 -- Name: produzione; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -501,7 +501,7 @@ CREATE TABLE produzione (
 ALTER TABLE produzione OWNER TO farmacista;
 
 --
--- TOC entry 200 (class 1259 OID 33433)
+-- TOC entry 199 (class 1259 OID 33736)
 -- Name: tempo_dt; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -515,7 +515,7 @@ CREATE TABLE tempo_dt (
 ALTER TABLE tempo_dt OWNER TO farmacista;
 
 --
--- TOC entry 199 (class 1259 OID 33431)
+-- TOC entry 200 (class 1259 OID 33739)
 -- Name: tempo_dt_id_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -530,8 +530,8 @@ CREATE SEQUENCE tempo_dt_id_seq
 ALTER TABLE tempo_dt_id_seq OWNER TO farmacista;
 
 --
--- TOC entry 2298 (class 0 OID 0)
--- Dependencies: 199
+-- TOC entry 2296 (class 0 OID 0)
+-- Dependencies: 200
 -- Name: tempo_dt_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -539,7 +539,7 @@ ALTER SEQUENCE tempo_dt_id_seq OWNED BY tempo_dt.id;
 
 
 --
--- TOC entry 191 (class 1259 OID 33001)
+-- TOC entry 201 (class 1259 OID 33741)
 -- Name: vendita; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -553,7 +553,7 @@ CREATE TABLE vendita (
 ALTER TABLE vendita OWNER TO farmacista;
 
 --
--- TOC entry 204 (class 1259 OID 33501)
+-- TOC entry 202 (class 1259 OID 33744)
 -- Name: vendita_audit; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -568,7 +568,7 @@ CREATE TABLE vendita_audit (
 ALTER TABLE vendita_audit OWNER TO farmacista;
 
 --
--- TOC entry 207 (class 1259 OID 33612)
+-- TOC entry 203 (class 1259 OID 33747)
 -- Name: vendita_audit_id_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -583,8 +583,8 @@ CREATE SEQUENCE vendita_audit_id_seq
 ALTER TABLE vendita_audit_id_seq OWNER TO farmacista;
 
 --
--- TOC entry 2299 (class 0 OID 0)
--- Dependencies: 207
+-- TOC entry 2297 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: vendita_audit_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -592,7 +592,7 @@ ALTER SEQUENCE vendita_audit_id_seq OWNED BY vendita_audit.id;
 
 
 --
--- TOC entry 202 (class 1259 OID 33457)
+-- TOC entry 204 (class 1259 OID 33749)
 -- Name: vendita_ft; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -607,7 +607,7 @@ CREATE TABLE vendita_ft (
 ALTER TABLE vendita_ft OWNER TO farmacista;
 
 --
--- TOC entry 201 (class 1259 OID 33455)
+-- TOC entry 205 (class 1259 OID 33752)
 -- Name: vendita_ft_id_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -622,8 +622,8 @@ CREATE SEQUENCE vendita_ft_id_seq
 ALTER TABLE vendita_ft_id_seq OWNER TO farmacista;
 
 --
--- TOC entry 2300 (class 0 OID 0)
--- Dependencies: 201
+-- TOC entry 2298 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: vendita_ft_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -631,7 +631,7 @@ ALTER SEQUENCE vendita_ft_id_seq OWNED BY vendita_ft.id;
 
 
 --
--- TOC entry 192 (class 1259 OID 33004)
+-- TOC entry 206 (class 1259 OID 33754)
 -- Name: vendita_id_seq; Type: SEQUENCE; Schema: public; Owner: farmacista
 --
 
@@ -646,8 +646,8 @@ CREATE SEQUENCE vendita_id_seq
 ALTER TABLE vendita_id_seq OWNER TO farmacista;
 
 --
--- TOC entry 2301 (class 0 OID 0)
--- Dependencies: 192
+-- TOC entry 2299 (class 0 OID 0)
+-- Dependencies: 206
 -- Name: vendita_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: farmacista
 --
 
@@ -655,7 +655,7 @@ ALTER SEQUENCE vendita_id_seq OWNED BY vendita.id;
 
 
 --
--- TOC entry 197 (class 1259 OID 33267)
+-- TOC entry 207 (class 1259 OID 33756)
 -- Name: vendita_prodotto; Type: TABLE; Schema: public; Owner: farmacista
 --
 
@@ -669,7 +669,7 @@ CREATE TABLE vendita_prodotto (
 ALTER TABLE vendita_prodotto OWNER TO farmacista;
 
 --
--- TOC entry 2087 (class 2604 OID 33090)
+-- TOC entry 2085 (class 2604 OID 33759)
 -- Name: medico matricola; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -677,7 +677,7 @@ ALTER TABLE ONLY medico ALTER COLUMN matricola SET DEFAULT nextval('medico_matri
 
 
 --
--- TOC entry 2088 (class 2604 OID 32966)
+-- TOC entry 2086 (class 2604 OID 33760)
 -- Name: prescrizione id; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -685,7 +685,7 @@ ALTER TABLE ONLY prescrizione ALTER COLUMN id SET DEFAULT nextval('prescrizione_
 
 
 --
--- TOC entry 2094 (class 2604 OID 33577)
+-- TOC entry 2088 (class 2604 OID 33761)
 -- Name: prodotto_dt id; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -693,7 +693,7 @@ ALTER TABLE ONLY prodotto_dt ALTER COLUMN id SET DEFAULT nextval('prodotto_dtt_i
 
 
 --
--- TOC entry 2091 (class 2604 OID 33436)
+-- TOC entry 2089 (class 2604 OID 33762)
 -- Name: tempo_dt id; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -701,7 +701,7 @@ ALTER TABLE ONLY tempo_dt ALTER COLUMN id SET DEFAULT nextval('tempo_dt_id_seq':
 
 
 --
--- TOC entry 2089 (class 2604 OID 33006)
+-- TOC entry 2090 (class 2604 OID 33763)
 -- Name: vendita id; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -709,7 +709,7 @@ ALTER TABLE ONLY vendita ALTER COLUMN id SET DEFAULT nextval('vendita_id_seq'::r
 
 
 --
--- TOC entry 2093 (class 2604 OID 33614)
+-- TOC entry 2091 (class 2604 OID 33764)
 -- Name: vendita_audit id; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -717,7 +717,7 @@ ALTER TABLE ONLY vendita_audit ALTER COLUMN id SET DEFAULT nextval('vendita_audi
 
 
 --
--- TOC entry 2092 (class 2604 OID 33460)
+-- TOC entry 2092 (class 2604 OID 33765)
 -- Name: vendita_ft id; Type: DEFAULT; Schema: public; Owner: farmacista
 --
 
@@ -725,7 +725,7 @@ ALTER TABLE ONLY vendita_ft ALTER COLUMN id SET DEFAULT nextval('vendita_ft_id_s
 
 
 --
--- TOC entry 2265 (class 0 OID 32823)
+-- TOC entry 2263 (class 0 OID 33687)
 -- Dependencies: 185
 -- Data for Name: casa_farmaceutica; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
@@ -735,8 +735,8 @@ INSERT INTO casa_farmaceutica VALUES ('Health Empire', 'Via Giulio Petroni 50, B
 
 
 --
--- TOC entry 2275 (class 0 OID 33138)
--- Dependencies: 195
+-- TOC entry 2264 (class 0 OID 33690)
+-- Dependencies: 186
 -- Data for Name: equivalenza; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -748,8 +748,8 @@ INSERT INTO equivalenza VALUES (10, 12);
 
 
 --
--- TOC entry 2266 (class 0 OID 32933)
--- Dependencies: 186
+-- TOC entry 2265 (class 0 OID 33693)
+-- Dependencies: 187
 -- Data for Name: medico; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -760,8 +760,8 @@ INSERT INTO medico VALUES ('Piero', 'Scalera', 1);
 
 
 --
--- TOC entry 2276 (class 0 OID 33178)
--- Dependencies: 196
+-- TOC entry 2266 (class 0 OID 33696)
+-- Dependencies: 188
 -- Data for Name: medico_farmaco; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -771,11 +771,13 @@ INSERT INTO medico_farmaco VALUES (2, 9);
 INSERT INTO medico_farmaco VALUES (3, 4);
 INSERT INTO medico_farmaco VALUES (3, 7);
 INSERT INTO medico_farmaco VALUES (3, 6);
+INSERT INTO medico_farmaco VALUES (1, 6);
+INSERT INTO medico_farmaco VALUES (1, 7);
 
 
 --
--- TOC entry 2302 (class 0 OID 0)
--- Dependencies: 194
+-- TOC entry 2300 (class 0 OID 0)
+-- Dependencies: 189
 -- Name: medico_matricola_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
@@ -783,8 +785,8 @@ SELECT pg_catalog.setval('medico_matricola_seq', 3, true);
 
 
 --
--- TOC entry 2267 (class 0 OID 32946)
--- Dependencies: 187
+-- TOC entry 2268 (class 0 OID 33701)
+-- Dependencies: 190
 -- Data for Name: paziente; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -796,19 +798,20 @@ INSERT INTO paziente VALUES ('Francesco', 'Lorusso', 'LRSFNC99R22A662B');
 
 
 --
--- TOC entry 2268 (class 0 OID 32958)
--- Dependencies: 188
+-- TOC entry 2269 (class 0 OID 33704)
+-- Dependencies: 191
 -- Data for Name: prescrizione; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
 INSERT INTO prescrizione VALUES (1, 2, 'LRSGPP92R19F262B');
 INSERT INTO prescrizione VALUES (2, 2, 'LRSMRC97C03A662R');
 INSERT INTO prescrizione VALUES (4, 3, 'FRRLNE91T50A225F');
+INSERT INTO prescrizione VALUES (5, 1, 'CLNFNC93M04A225E');
 
 
 --
--- TOC entry 2270 (class 0 OID 32986)
--- Dependencies: 190
+-- TOC entry 2270 (class 0 OID 33707)
+-- Dependencies: 192
 -- Data for Name: prescrizione_farmaci; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -818,20 +821,22 @@ INSERT INTO prescrizione_farmaci VALUES (2, 9);
 INSERT INTO prescrizione_farmaci VALUES (4, 4);
 INSERT INTO prescrizione_farmaci VALUES (4, 7);
 INSERT INTO prescrizione_farmaci VALUES (4, 6);
+INSERT INTO prescrizione_farmaci VALUES (5, 6);
+INSERT INTO prescrizione_farmaci VALUES (5, 7);
 
 
 --
--- TOC entry 2303 (class 0 OID 0)
--- Dependencies: 189
+-- TOC entry 2301 (class 0 OID 0)
+-- Dependencies: 193
 -- Name: prescrizione_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('prescrizione_id_seq', 4, true);
+SELECT pg_catalog.setval('prescrizione_id_seq', 5, true);
 
 
 --
--- TOC entry 2278 (class 0 OID 33304)
--- Dependencies: 198
+-- TOC entry 2272 (class 0 OID 33712)
+-- Dependencies: 194
 -- Data for Name: prodotto; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -853,17 +858,16 @@ INSERT INTO prodotto VALUES (10, 'traumagel', 'Gel da applicare su lividi e trau
 
 
 --
--- TOC entry 2283 (class 0 OID 33484)
--- Dependencies: 203
+-- TOC entry 2273 (class 0 OID 33719)
+-- Dependencies: 195
 -- Data for Name: prodotto_audit; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
-INSERT INTO prodotto_audit VALUES ('4', 'babylove', 'infanzia');
 
 
 --
--- TOC entry 2286 (class 0 OID 33574)
--- Dependencies: 206
+-- TOC entry 2274 (class 0 OID 33725)
+-- Dependencies: 196
 -- Data for Name: prodotto_dt; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -877,8 +881,8 @@ INSERT INTO prodotto_dt VALUES (14, 'fastumgel', 'farmaco brevettato', '11');
 
 
 --
--- TOC entry 2304 (class 0 OID 0)
--- Dependencies: 205
+-- TOC entry 2302 (class 0 OID 0)
+-- Dependencies: 197
 -- Name: prodotto_dtt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
@@ -886,8 +890,8 @@ SELECT pg_catalog.setval('prodotto_dtt_id_seq', 14, true);
 
 
 --
--- TOC entry 2273 (class 0 OID 33046)
--- Dependencies: 193
+-- TOC entry 2276 (class 0 OID 33733)
+-- Dependencies: 198
 -- Data for Name: produzione; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -906,20 +910,19 @@ INSERT INTO produzione VALUES (15, 'Farmaking', 'Via Bari 100, Altamura');
 
 
 --
--- TOC entry 2280 (class 0 OID 33433)
--- Dependencies: 200
+-- TOC entry 2277 (class 0 OID 33736)
+-- Dependencies: 199
 -- Data for Name: tempo_dt; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
 INSERT INTO tempo_dt VALUES (12, '01-2017', '2017');
 INSERT INTO tempo_dt VALUES (17, '02-2016', '2016');
 INSERT INTO tempo_dt VALUES (18, '01-2015', '2015');
-INSERT INTO tempo_dt VALUES (19, '01-2017', '2017');
 
 
 --
--- TOC entry 2305 (class 0 OID 0)
--- Dependencies: 199
+-- TOC entry 2303 (class 0 OID 0)
+-- Dependencies: 200
 -- Name: tempo_dt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
@@ -927,8 +930,8 @@ SELECT pg_catalog.setval('tempo_dt_id_seq', 19, true);
 
 
 --
--- TOC entry 2271 (class 0 OID 33001)
--- Dependencies: 191
+-- TOC entry 2279 (class 0 OID 33741)
+-- Dependencies: 201
 -- Data for Name: vendita; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -939,30 +942,29 @@ INSERT INTO vendita VALUES ('2015-03-03', NULL, 11);
 INSERT INTO vendita VALUES ('2017-04-18', NULL, 16);
 INSERT INTO vendita VALUES ('2017-04-18', NULL, 25);
 INSERT INTO vendita VALUES ('2017-04-18', 4, 27);
+INSERT INTO vendita VALUES ('2017-04-19', 2, 29);
 
 
 --
--- TOC entry 2284 (class 0 OID 33501)
--- Dependencies: 204
+-- TOC entry 2280 (class 0 OID 33744)
+-- Dependencies: 202
 -- Data for Name: vendita_audit; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
-INSERT INTO vendita_audit VALUES (12, 1, 11, 23);
-INSERT INTO vendita_audit VALUES (12, 1, 4, 25);
 
 
 --
--- TOC entry 2306 (class 0 OID 0)
--- Dependencies: 207
+-- TOC entry 2304 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: vendita_audit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('vendita_audit_id_seq', 25, true);
+SELECT pg_catalog.setval('vendita_audit_id_seq', 28, true);
 
 
 --
--- TOC entry 2282 (class 0 OID 33457)
--- Dependencies: 202
+-- TOC entry 2282 (class 0 OID 33749)
+-- Dependencies: 204
 -- Data for Name: vendita_ft; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -974,11 +976,14 @@ INSERT INTO vendita_ft VALUES (7, 17, 1, 12);
 INSERT INTO vendita_ft VALUES (8, 17, 1, 13);
 INSERT INTO vendita_ft VALUES (9, 18, 1, 13);
 INSERT INTO vendita_ft VALUES (11, 12, 1, 14);
+INSERT INTO vendita_ft VALUES (23, 12, 1, 14);
+INSERT INTO vendita_ft VALUES (25, 12, 1, 14);
+INSERT INTO vendita_ft VALUES (26, 12, 1, 9);
 
 
 --
--- TOC entry 2307 (class 0 OID 0)
--- Dependencies: 201
+-- TOC entry 2305 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: vendita_ft_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
@@ -986,17 +991,17 @@ SELECT pg_catalog.setval('vendita_ft_id_seq', 12, true);
 
 
 --
--- TOC entry 2308 (class 0 OID 0)
--- Dependencies: 192
+-- TOC entry 2306 (class 0 OID 0)
+-- Dependencies: 206
 -- Name: vendita_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('vendita_id_seq', 27, true);
+SELECT pg_catalog.setval('vendita_id_seq', 31, true);
 
 
 --
--- TOC entry 2277 (class 0 OID 33267)
--- Dependencies: 197
+-- TOC entry 2285 (class 0 OID 33756)
+-- Dependencies: 207
 -- Data for Name: vendita_prodotto; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
@@ -1010,10 +1015,11 @@ INSERT INTO vendita_prodotto VALUES (11, 12, 1);
 INSERT INTO vendita_prodotto VALUES (16, 11, 1);
 INSERT INTO vendita_prodotto VALUES (25, 11, 1);
 INSERT INTO vendita_prodotto VALUES (27, 4, 1);
+INSERT INTO vendita_prodotto VALUES (29, 8, 1);
 
 
 --
--- TOC entry 2096 (class 2606 OID 32827)
+-- TOC entry 2094 (class 2606 OID 33767)
 -- Name: casa_farmaceutica casa_farmaceutica_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1022,7 +1028,7 @@ ALTER TABLE ONLY casa_farmaceutica
 
 
 --
--- TOC entry 2110 (class 2606 OID 33142)
+-- TOC entry 2096 (class 2606 OID 33769)
 -- Name: equivalenza equivalenza_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1031,7 +1037,7 @@ ALTER TABLE ONLY equivalenza
 
 
 --
--- TOC entry 2112 (class 2606 OID 33182)
+-- TOC entry 2100 (class 2606 OID 33771)
 -- Name: medico_farmaco medico_farmaco_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1040,7 +1046,7 @@ ALTER TABLE ONLY medico_farmaco
 
 
 --
--- TOC entry 2098 (class 2606 OID 33092)
+-- TOC entry 2098 (class 2606 OID 33773)
 -- Name: medico medico_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1049,7 +1055,7 @@ ALTER TABLE ONLY medico
 
 
 --
--- TOC entry 2100 (class 2606 OID 33087)
+-- TOC entry 2102 (class 2606 OID 33775)
 -- Name: paziente paziente_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1058,7 +1064,7 @@ ALTER TABLE ONLY paziente
 
 
 --
--- TOC entry 2104 (class 2606 OID 33128)
+-- TOC entry 2106 (class 2606 OID 33777)
 -- Name: prescrizione_farmaci prescrizione_farmaci_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1067,7 +1073,7 @@ ALTER TABLE ONLY prescrizione_farmaci
 
 
 --
--- TOC entry 2102 (class 2606 OID 32968)
+-- TOC entry 2104 (class 2606 OID 33779)
 -- Name: prescrizione prescrizione_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1076,7 +1082,7 @@ ALTER TABLE ONLY prescrizione
 
 
 --
--- TOC entry 2125 (class 2606 OID 33582)
+-- TOC entry 2111 (class 2606 OID 33781)
 -- Name: prodotto_dt prodotto_dtt_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1085,7 +1091,7 @@ ALTER TABLE ONLY prodotto_dt
 
 
 --
--- TOC entry 2117 (class 2606 OID 33311)
+-- TOC entry 2109 (class 2606 OID 33783)
 -- Name: prodotto prodotto_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1094,7 +1100,7 @@ ALTER TABLE ONLY prodotto
 
 
 --
--- TOC entry 2108 (class 2606 OID 33050)
+-- TOC entry 2113 (class 2606 OID 33785)
 -- Name: produzione produzione_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1103,7 +1109,7 @@ ALTER TABLE ONLY produzione
 
 
 --
--- TOC entry 2119 (class 2606 OID 33438)
+-- TOC entry 2115 (class 2606 OID 33787)
 -- Name: tempo_dt tempo_dt_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1112,7 +1118,7 @@ ALTER TABLE ONLY tempo_dt
 
 
 --
--- TOC entry 2123 (class 2606 OID 33616)
+-- TOC entry 2119 (class 2606 OID 33789)
 -- Name: vendita_audit vendita_audit_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1121,7 +1127,7 @@ ALTER TABLE ONLY vendita_audit
 
 
 --
--- TOC entry 2121 (class 2606 OID 33462)
+-- TOC entry 2121 (class 2606 OID 33791)
 -- Name: vendita_ft vendita_ft_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1130,7 +1136,7 @@ ALTER TABLE ONLY vendita_ft
 
 
 --
--- TOC entry 2106 (class 2606 OID 33008)
+-- TOC entry 2117 (class 2606 OID 33793)
 -- Name: vendita vendita_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1139,7 +1145,7 @@ ALTER TABLE ONLY vendita
 
 
 --
--- TOC entry 2114 (class 2606 OID 33271)
+-- TOC entry 2123 (class 2606 OID 33795)
 -- Name: vendita_prodotto vendita_prodotto_pkey; Type: CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1148,7 +1154,7 @@ ALTER TABLE ONLY vendita_prodotto
 
 
 --
--- TOC entry 2115 (class 1259 OID 33374)
+-- TOC entry 2107 (class 1259 OID 33796)
 -- Name: index_tipo_prodotto; Type: INDEX; Schema: public; Owner: farmacista
 --
 
@@ -1156,7 +1162,7 @@ CREATE INDEX index_tipo_prodotto ON prodotto USING btree (tipo);
 
 
 --
--- TOC entry 2144 (class 2620 OID 33506)
+-- TOC entry 2144 (class 2620 OID 33797)
 -- Name: vendita_prodotto aggiorna_dw; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1164,7 +1170,7 @@ CREATE TRIGGER aggiorna_dw AFTER INSERT ON vendita_prodotto FOR EACH ROW EXECUTE
 
 
 --
--- TOC entry 2142 (class 2620 OID 33194)
+-- TOC entry 2140 (class 2620 OID 33798)
 -- Name: prescrizione_farmaci aggiorna_medico_farmaco; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1172,7 +1178,7 @@ CREATE TRIGGER aggiorna_medico_farmaco AFTER INSERT ON prescrizione_farmaci FOR 
 
 
 --
--- TOC entry 2143 (class 2620 OID 33361)
+-- TOC entry 2139 (class 2620 OID 33799)
 -- Name: equivalenza checkFormato; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1180,7 +1186,7 @@ CREATE TRIGGER "checkFormato" AFTER INSERT OR UPDATE ON equivalenza FOR EACH ROW
 
 
 --
--- TOC entry 2146 (class 2620 OID 33368)
+-- TOC entry 2142 (class 2620 OID 33800)
 -- Name: prodotto check_anni_brevetto_prodotto_non_brevettato; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1188,7 +1194,7 @@ CREATE TRIGGER check_anni_brevetto_prodotto_non_brevettato AFTER INSERT OR UPDAT
 
 
 --
--- TOC entry 2147 (class 2620 OID 33370)
+-- TOC entry 2143 (class 2620 OID 33801)
 -- Name: prodotto check_anno_brevetto_farmaco_brevettato; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1196,7 +1202,7 @@ CREATE TRIGGER check_anno_brevetto_farmaco_brevettato AFTER INSERT OR UPDATE ON 
 
 
 --
--- TOC entry 2145 (class 2620 OID 33365)
+-- TOC entry 2145 (class 2620 OID 33802)
 -- Name: vendita_prodotto check_vendita_prescritta; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1204,7 +1210,7 @@ CREATE TRIGGER check_vendita_prescritta AFTER INSERT OR UPDATE ON vendita_prodot
 
 
 --
--- TOC entry 2141 (class 2620 OID 33027)
+-- TOC entry 2141 (class 2620 OID 33803)
 -- Name: prescrizione_farmaci farmaco_non_prescrivibile; Type: TRIGGER; Schema: public; Owner: farmacista
 --
 
@@ -1212,7 +1218,7 @@ CREATE TRIGGER farmaco_non_prescrivibile AFTER INSERT OR UPDATE ON prescrizione_
 
 
 --
--- TOC entry 2131 (class 2606 OID 33056)
+-- TOC entry 2132 (class 2606 OID 33804)
 -- Name: produzione casa_farmaceutica_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1221,7 +1227,7 @@ ALTER TABLE ONLY produzione
 
 
 --
--- TOC entry 2133 (class 2606 OID 33327)
+-- TOC entry 2124 (class 2606 OID 33809)
 -- Name: equivalenza farmaco_brevettato; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1230,7 +1236,7 @@ ALTER TABLE ONLY equivalenza
 
 
 --
--- TOC entry 2132 (class 2606 OID 33312)
+-- TOC entry 2133 (class 2606 OID 33814)
 -- Name: produzione farmaco_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1239,7 +1245,7 @@ ALTER TABLE ONLY produzione
 
 
 --
--- TOC entry 2129 (class 2606 OID 33317)
+-- TOC entry 2130 (class 2606 OID 33819)
 -- Name: prescrizione_farmaci farmaco_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1248,7 +1254,7 @@ ALTER TABLE ONLY prescrizione_farmaci
 
 
 --
--- TOC entry 2136 (class 2606 OID 33322)
+-- TOC entry 2126 (class 2606 OID 33824)
 -- Name: medico_farmaco farmaco_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1257,7 +1263,7 @@ ALTER TABLE ONLY medico_farmaco
 
 
 --
--- TOC entry 2134 (class 2606 OID 33332)
+-- TOC entry 2125 (class 2606 OID 33829)
 -- Name: equivalenza farmaco_generico; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1266,7 +1272,7 @@ ALTER TABLE ONLY equivalenza
 
 
 --
--- TOC entry 2127 (class 2606 OID 33102)
+-- TOC entry 2128 (class 2606 OID 33834)
 -- Name: prescrizione medico_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1275,7 +1281,7 @@ ALTER TABLE ONLY prescrizione
 
 
 --
--- TOC entry 2135 (class 2606 OID 33183)
+-- TOC entry 2127 (class 2606 OID 33839)
 -- Name: medico_farmaco medico_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1284,7 +1290,7 @@ ALTER TABLE ONLY medico_farmaco
 
 
 --
--- TOC entry 2126 (class 2606 OID 33097)
+-- TOC entry 2129 (class 2606 OID 33844)
 -- Name: prescrizione paziente_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1293,7 +1299,7 @@ ALTER TABLE ONLY prescrizione
 
 
 --
--- TOC entry 2130 (class 2606 OID 33107)
+-- TOC entry 2134 (class 2606 OID 33849)
 -- Name: vendita prescrizione_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1302,7 +1308,7 @@ ALTER TABLE ONLY vendita
 
 
 --
--- TOC entry 2128 (class 2606 OID 33118)
+-- TOC entry 2131 (class 2606 OID 33854)
 -- Name: prescrizione_farmaci prescrizione_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1311,7 +1317,7 @@ ALTER TABLE ONLY prescrizione_farmaci
 
 
 --
--- TOC entry 2138 (class 2606 OID 33337)
+-- TOC entry 2137 (class 2606 OID 33859)
 -- Name: vendita_prodotto prodotto_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1320,7 +1326,7 @@ ALTER TABLE ONLY vendita_prodotto
 
 
 --
--- TOC entry 2140 (class 2606 OID 33589)
+-- TOC entry 2135 (class 2606 OID 33864)
 -- Name: vendita_ft prodotto_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1329,7 +1335,7 @@ ALTER TABLE ONLY vendita_ft
 
 
 --
--- TOC entry 2139 (class 2606 OID 33584)
+-- TOC entry 2136 (class 2606 OID 33869)
 -- Name: vendita_ft tempo_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1338,7 +1344,7 @@ ALTER TABLE ONLY vendita_ft
 
 
 --
--- TOC entry 2137 (class 2606 OID 33272)
+-- TOC entry 2138 (class 2606 OID 33874)
 -- Name: vendita_prodotto vendita_fk; Type: FK CONSTRAINT; Schema: public; Owner: farmacista
 --
 
@@ -1346,7 +1352,7 @@ ALTER TABLE ONLY vendita_prodotto
     ADD CONSTRAINT vendita_fk FOREIGN KEY (vendita) REFERENCES vendita(id);
 
 
--- Completed on 2017-04-19 15:43:37
+-- Completed on 2017-04-20 00:11:09
 
 --
 -- PostgreSQL database dump complete
