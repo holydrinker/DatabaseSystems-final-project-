@@ -18,7 +18,7 @@
 - Clone or download repository
 - Go with terminal into bdii-server directory and type `mvn exec:java -Dexec.mainClass="Server"`to run the server
 - Go with terminal into bdii-client/app directory and type `python -mSimpleHTTPServer`to run the client
-- Open your browser (app tested on Google Chrome): http://localhost:8000/
+- Open your browser: http://localhost:8000/
 - Enjoy
 
 
@@ -28,7 +28,7 @@
 - Copy Mondrian directory into Tomcat/webapps
 - Go into my directory database/dw and copy farmacia.xml and farmacia.jsp into Tomcat/webapps/mondrian/WEB-INF/queries
 - Run tomcat (default port 8080)
-- Open your browser (tested on Google Chrome): http://localhost:8080/mondrian/testpage.jsp?query=farmacia
+- Open your browser: http://localhost:8080/mondrian/testpage.jsp?query=farmacia
 - Enjoy
 
 
