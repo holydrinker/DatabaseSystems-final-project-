@@ -20,4 +20,5 @@
 - Copy Mondrian directory into Tomcat/webapps
 - Go into my directory database/dw and copy farmacia.xml and farmacia.jsp into Tomcat/webapps/mondrian/WEB-INF/queries
 - Run tomcat (default port 8080)
-- Open your browser (tested on Google Chrome): http://localhost:8080/
+- Open your browser (tested on Google Chrome): http://localhost:8080/mondrian/testpage.jsp?query=farmacia
+- Enjoy
