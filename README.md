@@ -7,14 +7,15 @@
 
 #### Import Database
 - Clone or download repository
+- Create a postgres user '(name: farmacista, password: farmacista)'
 - Find database/db.sql
 - Open Postgres shell
 - Import db typing `\i 'path/db.sql'`
 
 #### Run application
 - Clone or download repository
-- Go with terminal  into bdii-server directory and type `mvn exec:java -Dexec.mainClass="Server"`
-- Go with termina into bdii-client/app and type `python -mSimpleHTTPServer`
+- Go with terminal  into bdii-server directory and type `mvn exec:java -Dexec.mainClass="Server"`to run the server
+- Go with termina into bdii-client/app and type `python -mSimpleHTTPServer`to run the client
 - Open your browser (app tested on Google Chrome): http://localhost:8000/
 - Enjoy
 
