@@ -3,11 +3,16 @@
 
 #### Required
 - maven
-- python (or other stuff to run client)
+- python (or other tool to run client)
 
+#### Import Database
+- Clone or download repository
+- Find database/db.sql
+- Open Postgres shell
+- Import db typing `\i 'path/db.sql'`
 
 #### Run application
-- Import db into postgres (dbname: farmacia, user: farmacista, password: farmacista)
+- Clone or download repository
 - Go with terminal  into bdii-server directory and type `mvn exec:java -Dexec.mainClass="Server"`
 - Go with termina into bdii-client/app and type `python -mSimpleHTTPServer`
 - Open your browser (app tested on Google Chrome): http://localhost:8000/
