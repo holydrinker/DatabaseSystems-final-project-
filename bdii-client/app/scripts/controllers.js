@@ -1,6 +1,7 @@
 'use strict';
 
-app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory', function ($scope,$route, pazientiFactory) {
+app.controller('PazientiCtrl', ['$scope', '$route', 'pazientiFactory',
+    function ($scope,$route, pazientiFactory) {
 
     $scope.pazienti = [];
     $scope.message = "Loading...";

@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.2
 -- Dumped by pg_dump version 9.6.2
 
--- Started on 2017-04-16 02:40:27
+-- Started on 2017-04-19 15:43:36
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -768,6 +768,9 @@ INSERT INTO medico VALUES ('Piero', 'Scalera', 1);
 INSERT INTO medico_farmaco VALUES (2, 2);
 INSERT INTO medico_farmaco VALUES (2, 8);
 INSERT INTO medico_farmaco VALUES (2, 9);
+INSERT INTO medico_farmaco VALUES (3, 4);
+INSERT INTO medico_farmaco VALUES (3, 7);
+INSERT INTO medico_farmaco VALUES (3, 6);
 
 
 --
@@ -800,6 +803,7 @@ INSERT INTO paziente VALUES ('Francesco', 'Lorusso', 'LRSFNC99R22A662B');
 
 INSERT INTO prescrizione VALUES (1, 2, 'LRSGPP92R19F262B');
 INSERT INTO prescrizione VALUES (2, 2, 'LRSMRC97C03A662R');
+INSERT INTO prescrizione VALUES (4, 3, 'FRRLNE91T50A225F');
 
 
 --
@@ -811,6 +815,9 @@ INSERT INTO prescrizione VALUES (2, 2, 'LRSMRC97C03A662R');
 INSERT INTO prescrizione_farmaci VALUES (1, 2);
 INSERT INTO prescrizione_farmaci VALUES (2, 8);
 INSERT INTO prescrizione_farmaci VALUES (2, 9);
+INSERT INTO prescrizione_farmaci VALUES (4, 4);
+INSERT INTO prescrizione_farmaci VALUES (4, 7);
+INSERT INTO prescrizione_farmaci VALUES (4, 6);
 
 
 --
@@ -819,7 +826,7 @@ INSERT INTO prescrizione_farmaci VALUES (2, 9);
 -- Name: prescrizione_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('prescrizione_id_seq', 2, true);
+SELECT pg_catalog.setval('prescrizione_id_seq', 4, true);
 
 
 --
@@ -834,13 +841,14 @@ INSERT INTO prodotto VALUES (1, 'studivarium', 'Pillole che fanno venire voglia 
 INSERT INTO prodotto VALUES (2, 'tristup', 'Farmaco per tirarti su quando sei triste', 'farmaco brevettato', true, 2);
 INSERT INTO prodotto VALUES (3, 'happycure', 'Pillole che mette allegria', 'farmaco generico', false, -1);
 INSERT INTO prodotto VALUES (4, 'babylove', 'Farmaco per sedare il bambino durante la notte', 'infanzia', true, -1);
-INSERT INTO prodotto VALUES (5, 'yougskin', 'Crema per idratante per mantnere la pelle giovane', 'cosmetica', false, -1);
 INSERT INTO prodotto VALUES (6, 'sleepy', 'Gocce per combattere la insonnia', 'farmaco generico', true, -1);
 INSERT INTO prodotto VALUES (7, 'dreamly', 'Compresse per chi ha problemi ad addormentarsi', 'farmaco brevettato', true, 2);
 INSERT INTO prodotto VALUES (8, 'viallergo', 'Spray nasale per alleviare i sintomi da allergia al polline', 'farmaco brevettato', true, 5);
 INSERT INTO prodotto VALUES (9, 'starnutina', 'Compresse per limitare i sintomi da allergia', 'farmaco generico', true, -1);
 INSERT INTO prodotto VALUES (14, 'vitaminamia', 'Integratore per vitamine', 'farmaco generico', false, -1);
+INSERT INTO prodotto VALUES (5, 'yougskin', 'Crema per idratante per mantenere la pelle giovane', 'cosmetica', false, -1);
 INSERT INTO prodotto VALUES (12, 'supergel', 'Super crema da applicare in seguito a contusioni', 'farmaco generico', false, -1);
+INSERT INTO prodotto VALUES (15, 'febbricitina', 'Abbassa la febbre', 'farmaco generico', true, -1);
 INSERT INTO prodotto VALUES (10, 'traumagel', 'Gel da applicare su lividi e traumi', 'farmaco brevettato', false, 3);
 
 
@@ -850,6 +858,7 @@ INSERT INTO prodotto VALUES (10, 'traumagel', 'Gel da applicare su lividi e trau
 -- Data for Name: prodotto_audit; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
+INSERT INTO prodotto_audit VALUES ('4', 'babylove', 'infanzia');
 
 
 --
@@ -864,6 +873,7 @@ INSERT INTO prodotto_dt VALUES (10, 'starnutina', 'farmaco generico', '9');
 INSERT INTO prodotto_dt VALUES (11, 'yougskin', 'cosmetica', '5');
 INSERT INTO prodotto_dt VALUES (12, 'traumagel', 'farmaco brevettato', '10');
 INSERT INTO prodotto_dt VALUES (13, 'supergel', 'farmaco generico', '12');
+INSERT INTO prodotto_dt VALUES (14, 'fastumgel', 'farmaco brevettato', '11');
 
 
 --
@@ -872,7 +882,7 @@ INSERT INTO prodotto_dt VALUES (13, 'supergel', 'farmaco generico', '12');
 -- Name: prodotto_dtt_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('prodotto_dtt_id_seq', 13, true);
+SELECT pg_catalog.setval('prodotto_dtt_id_seq', 14, true);
 
 
 --
@@ -884,8 +894,6 @@ SELECT pg_catalog.setval('prodotto_dtt_id_seq', 13, true);
 INSERT INTO produzione VALUES (1, 'Farmaking', 'Via Bari 100, Altamura');
 INSERT INTO produzione VALUES (2, 'Farmaking', 'Via Bari 100, Altamura');
 INSERT INTO produzione VALUES (3, 'Farmaking', 'Via Bari 100, Altamura');
-INSERT INTO produzione VALUES (4, 'Farmaking', 'Via Bari 100, Altamura');
-INSERT INTO produzione VALUES (5, 'Health Empire', 'Via Giulio Petroni 50, Bari');
 INSERT INTO produzione VALUES (6, 'Health Empire', 'Via Giulio Petroni 50, Bari');
 INSERT INTO produzione VALUES (7, 'Health Empire', 'Via Giulio Petroni 50, Bari');
 INSERT INTO produzione VALUES (8, 'Health Empire', 'Via Giulio Petroni 50, Bari');
@@ -894,6 +902,7 @@ INSERT INTO produzione VALUES (10, 'Health Empire', 'Via Giulio Petroni 50, Bari
 INSERT INTO produzione VALUES (11, 'Health Empire', 'Via Giulio Petroni 50, Bari');
 INSERT INTO produzione VALUES (12, 'Health Empire', 'Via Giulio Petroni 50, Bari');
 INSERT INTO produzione VALUES (14, 'Health Empire', 'Via Giulio Petroni 50, Bari');
+INSERT INTO produzione VALUES (15, 'Farmaking', 'Via Bari 100, Altamura');
 
 
 --
@@ -927,6 +936,9 @@ INSERT INTO vendita VALUES ('2017-04-12', 1, 1);
 INSERT INTO vendita VALUES ('2017-04-13', 2, 2);
 INSERT INTO vendita VALUES ('2016-12-20', NULL, 3);
 INSERT INTO vendita VALUES ('2015-03-03', NULL, 11);
+INSERT INTO vendita VALUES ('2017-04-18', NULL, 16);
+INSERT INTO vendita VALUES ('2017-04-18', NULL, 25);
+INSERT INTO vendita VALUES ('2017-04-18', 4, 27);
 
 
 --
@@ -935,6 +947,8 @@ INSERT INTO vendita VALUES ('2015-03-03', NULL, 11);
 -- Data for Name: vendita_audit; Type: TABLE DATA; Schema: public; Owner: farmacista
 --
 
+INSERT INTO vendita_audit VALUES (12, 1, 11, 23);
+INSERT INTO vendita_audit VALUES (12, 1, 4, 25);
 
 
 --
@@ -943,7 +957,7 @@ INSERT INTO vendita VALUES ('2015-03-03', NULL, 11);
 -- Name: vendita_audit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('vendita_audit_id_seq', 9, true);
+SELECT pg_catalog.setval('vendita_audit_id_seq', 25, true);
 
 
 --
@@ -959,6 +973,7 @@ INSERT INTO vendita_ft VALUES (6, 17, 6, 11);
 INSERT INTO vendita_ft VALUES (7, 17, 1, 12);
 INSERT INTO vendita_ft VALUES (8, 17, 1, 13);
 INSERT INTO vendita_ft VALUES (9, 18, 1, 13);
+INSERT INTO vendita_ft VALUES (11, 12, 1, 14);
 
 
 --
@@ -976,7 +991,7 @@ SELECT pg_catalog.setval('vendita_ft_id_seq', 12, true);
 -- Name: vendita_id_seq; Type: SEQUENCE SET; Schema: public; Owner: farmacista
 --
 
-SELECT pg_catalog.setval('vendita_id_seq', 11, true);
+SELECT pg_catalog.setval('vendita_id_seq', 27, true);
 
 
 --
@@ -992,6 +1007,9 @@ INSERT INTO vendita_prodotto VALUES (3, 5, 6);
 INSERT INTO vendita_prodotto VALUES (3, 10, 1);
 INSERT INTO vendita_prodotto VALUES (3, 12, 1);
 INSERT INTO vendita_prodotto VALUES (11, 12, 1);
+INSERT INTO vendita_prodotto VALUES (16, 11, 1);
+INSERT INTO vendita_prodotto VALUES (25, 11, 1);
+INSERT INTO vendita_prodotto VALUES (27, 4, 1);
 
 
 --
@@ -1328,7 +1346,7 @@ ALTER TABLE ONLY vendita_prodotto
     ADD CONSTRAINT vendita_fk FOREIGN KEY (vendita) REFERENCES vendita(id);
 
 
--- Completed on 2017-04-16 02:40:28
+-- Completed on 2017-04-19 15:43:37
 
 --
 -- PostgreSQL database dump complete

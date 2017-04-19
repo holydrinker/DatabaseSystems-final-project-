@@ -6,11 +6,11 @@ import org.json.JSONObject;
 import utilities.Params;
 
 
-public class Vendita extends Jsonizable {
-    public int id;
-    public String data;
-    public String prescrizione;
-    public String prodotti;
+public class Vendita implements Jsonizable {
+    private int id;
+    private String data;
+    private String prescrizione;
+    private String prodotti;
 
     public Vendita(int id, String data, String prescrizione, String prodotti){
         this.id = id;

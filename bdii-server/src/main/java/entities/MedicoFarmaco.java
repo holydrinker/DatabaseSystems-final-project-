@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import utilities.Params;
 
-public class MedicoFarmaco extends Jsonizable {
+public class MedicoFarmaco implements Jsonizable {
     private int medico;
     private int farmaco;
 

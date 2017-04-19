@@ -4,7 +4,7 @@ package entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Prodotto extends Jsonizable {
+public class Prodotto implements Jsonizable {
     private int id;
     private String nome;
     private String descrizione;

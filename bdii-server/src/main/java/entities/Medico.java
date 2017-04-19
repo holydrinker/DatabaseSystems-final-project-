@@ -4,7 +4,7 @@ package entities;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Medico extends Jsonizable{
+public class Medico implements Jsonizable{
     private String nome;
     private String cognome;
     private int matricola;
